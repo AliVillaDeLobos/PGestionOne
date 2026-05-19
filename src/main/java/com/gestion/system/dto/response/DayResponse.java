@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Builder
 public class DayResponse {
 
+    private Integer id;
     private LocalDate date;
     private String dayName;
     private WeekResponse week;

@@ -19,7 +19,8 @@ public class DaysHours {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDaysHours;
+     @Column(name = "id_days_hours")
+     private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_day_subtask")

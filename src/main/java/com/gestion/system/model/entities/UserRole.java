@@ -14,7 +14,8 @@ public class UserRole {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUserRole;
+     @Column(name = "id_user_role")
+    private Integer id;
 
       @ManyToOne(fetch = FetchType.LAZY)
       @JoinColumn(name = "id_user", nullable = false)

@@ -14,7 +14,8 @@ public class UserProjectRole {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUserProjectRole;
+     @Column(name = "id_user_project_role")
+    private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_user_project", nullable = false)

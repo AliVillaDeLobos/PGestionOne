@@ -16,7 +16,8 @@ public class Subtask {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idSubtask;
+     @Column(name = "id_subtask")
+    private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_task", nullable = false)

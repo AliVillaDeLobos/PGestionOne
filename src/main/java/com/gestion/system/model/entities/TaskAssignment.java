@@ -17,7 +17,8 @@ public class TaskAssignment {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTaskAssignment;
+     @Column(name = "id_task_assignment")
+    private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_task", nullable = false)
