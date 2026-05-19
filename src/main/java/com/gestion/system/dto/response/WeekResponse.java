@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Builder
 public class WeekResponse {
 
+    private Integer id;
     private Integer weekNumber;
     private Integer year;
     private LocalDate startDate;

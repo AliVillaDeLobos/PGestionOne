@@ -16,11 +16,10 @@ public class AuditMapper {
         this.userMapper = userMapper;
     }
 
-    //Entidad a DTO
     public AuditResponse toResponse(Audit audit) {
         if (audit == null) {return null;}
         AuditResponse dto = new AuditResponse();
-            dto.setId(audit.getIdAudit());
+            dto.setId(audit.getId());
             dto.setTableName(audit.getTableName());
             dto.setRecordId(audit.getRecordId());
             dto.setAction(audit.getOperation());
@@ -35,7 +34,6 @@ public class AuditMapper {
         return dto;
     }
 
-    //Lista de Entity a DTO
     public List<AuditResponse> listResponse(List<Audit> audits) {
         if (audits == null || audits.isEmpty()) {return List.of();}
         return audits.stream().map(this::toResponse).collect(Collectors.toList());
