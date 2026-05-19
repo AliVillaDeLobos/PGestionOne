@@ -12,10 +12,9 @@ import java.time.LocalDate;
 public class SubtaskResponse {
 
     private Integer id;
-
     private String description;
     private String name;
-    private Boolean status;
+    private Boolean completed;
     private LocalDate startDate;
     private Boolean isDeleted;
     private TaskResponse task;
