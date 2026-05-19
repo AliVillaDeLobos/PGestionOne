@@ -14,7 +14,7 @@ public class UserProject {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUserProject;
+    private Integer idUserProject;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_user", nullable = false)

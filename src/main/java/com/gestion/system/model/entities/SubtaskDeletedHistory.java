@@ -17,7 +17,7 @@ public class SubtaskDeletedHistory {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDeletedSubtask;
+    private Integer idSubtaskDeletedHistory;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_subtask", nullable = false)

@@ -36,7 +36,7 @@ public class AuditMapper {
     }
 
     //Lista de Entity a DTO
-    public List<AuditResponse> toResponseList(List<Audit> audits) {
+    public List<AuditResponse> listResponse(List<Audit> audits) {
         if (audits == null || audits.isEmpty()) {return List.of();}
         return audits.stream().map(this::toResponse).collect(Collectors.toList());
     }

@@ -5,6 +5,7 @@ import com.gestion.system.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,7 +19,7 @@ public class Tasks {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTasks;
+    private Integer idTask;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_project", nullable = false)
@@ -31,13 +32,14 @@ public class Tasks {
     @Column(name = "name", nullable = false)
     private String name;
 
-     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private Status status;
 
      @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
      @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
 }

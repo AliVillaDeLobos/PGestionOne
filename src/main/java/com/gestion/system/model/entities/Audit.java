@@ -40,11 +40,11 @@ public class Audit {
     private User userCreated;
 
      @JdbcTypeCode(SqlTypes.JSON)
-     @Column(columnDefinition = "JSON")
+     @Column(columnDefinition = "LONGTEXT")
     private JsonNode oldData;
 
      @JdbcTypeCode(SqlTypes.JSON)
-     @Column(columnDefinition = "JSON")
+     @Column(columnDefinition = "LONGTEXT")
     private JsonNode newData;
 
      @CreationTimestamp //El campo será llenado cuando entre en la DB en automatico

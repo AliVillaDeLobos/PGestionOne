@@ -11,10 +11,11 @@ import java.time.LocalDate;
 @Builder
 public class SubtaskResponse {
 
-    private TaskResponse task;
     private String description;
     private String name;
     private Boolean status;
     private LocalDate startDate;
     private Boolean isDeleted;
+//    private TaskResponse task;
+
 }

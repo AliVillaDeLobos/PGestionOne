@@ -21,7 +21,8 @@ public class DaysSubtasks {
      @JoinColumn(name = "id_subtask", nullable = true) //Por defecto esta en PENDING EN DB
     private Subtask subtask;
 
-     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private Status status;
 
 

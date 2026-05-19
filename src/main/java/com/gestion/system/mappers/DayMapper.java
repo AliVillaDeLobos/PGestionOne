@@ -17,7 +17,6 @@ public class DayMapper {
         this.weekMapper = weekMapper;
     }
 
-    //Entity a Response
     public DayResponse toResponse(Day day){
         if (day == null ){return null;}
         DayResponse dto = mapper.map(day, DayResponse.class);
@@ -25,8 +24,7 @@ public class DayMapper {
         return dto;
     }
 
-    //Lista de Response
-    public List<DayResponse> toResponseList(List<Day> days){
+    public List<DayResponse> lsitResponse(List<Day> days){
         if (days == null) {return List.of();}
         return days.stream().map(this::toResponse).toList();
     }

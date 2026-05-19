@@ -25,7 +25,7 @@ public class UserMapper {
         return dto;
     }
 
-    public User toRequest (UserRequest dto){
+    public User requestToEntity (UserRequest dto){
     //El Mapper no maneja de forma correcta los campos compuestos, por eso se hizo manualmente
         if (dto == null) {return null;}
         User user = new User();
@@ -38,13 +38,13 @@ public class UserMapper {
     }
 
 
-    public List<User> toRequestList (List<UserRequest> dtos){
+    public List<User> listRequest (List<UserRequest> dtos){
         // Se regresa lista  vacia para evitar el NullPointer, en la serealización JSON
         if (dtos == null) return List.of();
-        return dtos.stream().map(this::toRequest).toList();
+        return dtos.stream().map(this::requestToEntity).toList();
     }
 
-    public List<UserResponse> toResponseList (List<User> users){
+    public List<UserResponse> listResponse (List<User> users){
         if (users == null) return List.of();
         return users.stream().map(this::toResponse).toList();
     }

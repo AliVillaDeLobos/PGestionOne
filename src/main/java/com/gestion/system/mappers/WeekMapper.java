@@ -24,7 +24,7 @@ public class WeekMapper {
     }
 
     //List de Response
-    public List<WeekResponse> toResponseList(List<Week> weeks) {
+    public List<WeekResponse> listResponse(List<Week> weeks) {
         return weeks == null ? List.of() : weeks.stream().map(this::toResponse).toList();
     }
 }
