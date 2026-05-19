@@ -1,0 +1,1 @@
+ALTER TABLE subtasks RENAME COLUMN status TO completed;

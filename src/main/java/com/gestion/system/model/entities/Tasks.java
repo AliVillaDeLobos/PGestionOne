@@ -34,8 +34,8 @@ public class Tasks {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status;
+    @Column(name = "status")
+    private Status status = Status.PENDING;
 
      @Column(name = "start_date", nullable = false)
     private LocalDate startDate;

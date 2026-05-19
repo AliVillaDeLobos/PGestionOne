@@ -21,7 +21,7 @@ public class Subtask {
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_task", nullable = false)
-    private Tasks tasks;
+    private Tasks task;
 
      @Column (name = "description")
     private String description;

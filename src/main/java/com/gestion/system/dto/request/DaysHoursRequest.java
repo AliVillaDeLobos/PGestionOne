@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 public class DaysHoursRequest {
 
 
-     @NotNull
+     @NotNull(message = "La fecha inicial de la tarea es obligarotia.")
      @FutureOrPresent
     private LocalDateTime startTime;
 
-     @NotNull
+     @NotNull(message = "La fecha del final de la tarea es obligarotia.")
      @FutureOrPresent
     private LocalDateTime endTime;
 

@@ -22,7 +22,7 @@ public class SubtaskMapper {
     public SubtaskResponse toResponse(Subtask subtask) {
         if (subtask == null ) return null;
         SubtaskResponse dto = mapper.map(subtask, SubtaskResponse.class);
-        dto.setTask(taskMapper.toResponse(subtask.getTasks());
+        dto.setTask(taskMapper.toResponse(subtask.getTask()));
         return dto;
     }
 
@@ -31,7 +31,7 @@ public class SubtaskMapper {
             : Subtask.builder()
                 .name(subtaskRequest.getName())
                 .description(subtaskRequest.getDescription())
-                .tasks(task)
+                .task(task)
                 .build();
     }
 
