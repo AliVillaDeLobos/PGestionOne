@@ -28,5 +28,5 @@ public class SubtaskDeletedHistory {
     private String message;
 
      @Column(name = "deleted_date", nullable = false)
-    private LocalDate daletedDate;
+    private LocalDate deletedDate;
 }

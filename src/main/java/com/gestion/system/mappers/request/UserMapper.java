@@ -1,6 +1,6 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.UserRequest;
+import com.gestion.system.dto.request.create.UserRequest;
 import com.gestion.system.dto.response.UserResponse;
 import com.gestion.system.model.entities.User;
 import org.modelmapper.ModelMapper;

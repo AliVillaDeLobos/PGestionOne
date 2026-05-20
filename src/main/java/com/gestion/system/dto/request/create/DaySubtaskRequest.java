@@ -1,4 +1,4 @@
-package com.gestion.system.dto.request;
+package com.gestion.system.dto.request.create;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

@@ -1,4 +1,4 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.response;
 
 import com.gestion.system.dto.response.WeekResponse;
 import com.gestion.system.model.entities.Week;

@@ -1,6 +1,6 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.SubtaskRequest;
+import com.gestion.system.dto.request.create.SubtaskRequest;
 import com.gestion.system.dto.response.SubtaskResponse;
 import com.gestion.system.model.entities.Subtask;
 import com.gestion.system.model.entities.Tasks;

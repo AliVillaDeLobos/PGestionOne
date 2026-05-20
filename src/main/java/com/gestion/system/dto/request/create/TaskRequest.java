@@ -1,4 +1,4 @@
-package com.gestion.system.dto.request;
+package com.gestion.system.dto.request.create;
 
 import com.gestion.system.model.enums.Colors;
 import com.gestion.system.model.enums.Status;

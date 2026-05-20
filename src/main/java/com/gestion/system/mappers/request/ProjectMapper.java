@@ -1,6 +1,6 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.ProjectRequest;
+import com.gestion.system.dto.request.create.ProjectRequest;
 import com.gestion.system.dto.response.ProjectResponse;
 import com.gestion.system.model.entities.Project;
 import org.modelmapper.ModelMapper;

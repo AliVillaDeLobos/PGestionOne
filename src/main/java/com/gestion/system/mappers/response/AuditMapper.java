@@ -1,6 +1,7 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.response;
 
 import com.gestion.system.dto.response.AuditResponse;
+import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.model.entities.Audit;
 import org.springframework.stereotype.Component;
 

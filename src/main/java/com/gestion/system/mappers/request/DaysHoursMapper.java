@@ -1,7 +1,7 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
 
-import com.gestion.system.dto.request.DaysHoursRequest;
+import com.gestion.system.dto.request.create.DaysHoursRequest;
 import com.gestion.system.dto.response.DaysHoursResponse;
 import com.gestion.system.model.entities.DaysHours;
 import com.gestion.system.model.entities.DaysSubtasks;

@@ -1,12 +1,12 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
 
-import com.gestion.system.dto.request.DaySubtaskRequest;
+import com.gestion.system.dto.request.create.DaySubtaskRequest;
 import com.gestion.system.dto.response.DaySubtaskResponse;
+import com.gestion.system.mappers.response.DayMapper;
 import com.gestion.system.model.entities.DaysSubtasks;
 import com.gestion.system.model.entities.Day;
 import com.gestion.system.model.entities.Subtask;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
