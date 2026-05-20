@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ValidDateRange(start = "startDate", end = "endDate")
-public class TaskRequestUpdate {
+public class TaskUpdateRequest {
 
     private Colors color;
     private String name;

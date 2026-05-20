@@ -4,13 +4,11 @@ import com.gestion.system.dto.request.SubtaskRequest;
 import com.gestion.system.dto.response.SubtaskResponse;
 import com.gestion.system.model.entities.Subtask;
 import com.gestion.system.model.entities.Tasks;
-import org.mapstruct.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
 @Component
 public class SubtaskMapper {
     private final ModelMapper mapper;

@@ -1,7 +1,6 @@
 package com.gestion.system.mappers;
 
-import com.gestion.system.dto.request.TaskRequestCreate;
-import com.gestion.system.dto.request.TaskRequestUpdate;
+import com.gestion.system.dto.request.TaskRequest;
 import com.gestion.system.dto.response.TaskResponse;
 import com.gestion.system.model.entities.Project;
 import com.gestion.system.model.entities.Tasks;
@@ -29,7 +28,7 @@ public class TaskMapper {
         return dto;
     }
 
-    public Tasks requestToEntity(TaskRequestCreate taskRequest, Project project
+    public Tasks requestToEntity(TaskRequest taskRequest, Project project
     ) {
         if (project == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
         if (taskRequest == null) return null;
@@ -43,7 +42,7 @@ public class TaskMapper {
                 : tasks.stream().map(this::toResponse).toList();
     }
 
-    public List<Tasks> listEntity(List<TaskRequestCreate> tasksResponse, Project project){
+    public List<Tasks> listEntity(List<TaskRequest> tasksResponse, Project project){
         if (project == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
         return tasksResponse == null || tasksResponse.isEmpty() ? List.of()
                 : tasksResponse.stream().map(

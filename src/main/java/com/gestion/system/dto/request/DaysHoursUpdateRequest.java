@@ -13,14 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @ValidDateRange(start = "startTime", end = "endTime")
-public class DaysHoursRequest {
+public class DaysHoursUpdateRequest {
 
-
-     @NotNull(message = "La fecha inicial de la tarea es obligarotia.")
      @FutureOrPresent
     private LocalDateTime startTime;
-
-     @NotNull(message = "La fecha del final de la tarea es obligarotia.")
      @FutureOrPresent
     private LocalDateTime endTime;
 

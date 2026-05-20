@@ -9,14 +9,10 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DaySubtaskRequest {
-
+public class DaySubtaskUpdateRequest {
      @Positive(message = "EL Id no puede ser negativo.")
-     @NotNull(message = "El obligatorio asignarle un Id de Subtask.")
     private Integer idSubtask;
 
-
      @Positive(message = "EL Id no puede ser negativo.")
-     @NotNull(message = "El obligatorio asignarle un Id de Day.")
     private Integer idDay;
 }

@@ -6,7 +6,6 @@ import com.gestion.system.validations.ValidDateRange;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ValidDateRange(start = "startDate", end = "endDate")
-public class TaskRequestCreate {
+public class TaskRequest {
 
     @NotNull(message = "El color es obligatorio. " +
             "\nRevisa la lista de colores en el enum 'colors-enum'.")
