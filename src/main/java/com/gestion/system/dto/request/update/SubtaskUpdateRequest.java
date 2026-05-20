@@ -1,4 +1,4 @@
-package com.gestion.system.dto.request;
+package com.gestion.system.dto.request.update;
 
 import lombok.*;
 
@@ -11,5 +11,6 @@ public class SubtaskUpdateRequest {
 
     private String description;
     private String name;
+    private Boolean completed;
 
 }

@@ -33,7 +33,7 @@ public class Subtask {
     private Boolean completed;
 
      @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private LocalDate startDate;  //Es la fecha de creacion del la Subtarea
 
      @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;

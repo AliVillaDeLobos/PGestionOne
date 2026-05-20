@@ -19,11 +19,11 @@ public class DaysSubtasks {
      private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "id_subtask", nullable = true) //Por defecto esta en PENDING EN DB
+     @JoinColumn(name = "id_subtask", nullable = false)
     private Subtask subtask;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status") //Por defecto esta en PENDING EN DB
     private Status status;
 
 

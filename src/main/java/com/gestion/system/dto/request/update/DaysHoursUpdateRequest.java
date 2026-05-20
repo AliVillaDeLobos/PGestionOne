@@ -1,8 +1,7 @@
-package com.gestion.system.dto.request;
+package com.gestion.system.dto.request.update;
 
 import com.gestion.system.validations.ValidDateRange;
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;

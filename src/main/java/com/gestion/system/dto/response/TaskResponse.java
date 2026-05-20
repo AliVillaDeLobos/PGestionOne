@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class TaskResponse {
 
     private Integer id;
-//    private PorjectResponse project;
+    private ProjectResponse project;
     private Colors color;
     private String name;
     private Status status;

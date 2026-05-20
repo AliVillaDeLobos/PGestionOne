@@ -12,19 +12,17 @@ import java.util.List;
 @Component
 public class TaskMapper {
     private final ModelMapper mapper;
-//    private final PorjectMapper projectMapper;
+    private final ProjectMapper projectMapper;
 
-    public TaskMapper(ModelMapper mapper
-//        ProjectMapper projectMapper
-    ) {
+    public TaskMapper(ModelMapper mapper, ProjectMapper projectMapper) {
         this.mapper = mapper;
-//        this.projectMapper = projectMapper
+        this.projectMapper = projectMapper;
     }
 
     public TaskResponse toResponse(Tasks task) {
         if (task == null) return null;
         TaskResponse dto = mapper.map(task, TaskResponse.class);
-//        dto.setProject(projectMapper.toResponse(tesk.getPorject()));
+        dto.setProject(projectMapper.toResponse(task.getProject()));
         return dto;
     }
 

@@ -25,7 +25,7 @@ public class Project {
      @Column(name = "description", nullable = false)
     private String description;
 
-     @Column(name = "start_date", nullable = false)
+     @Column(name = "start_date", nullable = false) //Fecha de inicio del proyecto
     private LocalDate startDate;
 
 }
