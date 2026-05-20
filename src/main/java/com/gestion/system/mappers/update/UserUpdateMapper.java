@@ -10,7 +10,8 @@ import org.mapstruct.MappingTarget;
 @Mapper(config = GlobalMapperConfig.class)
 public interface UserUpdateMapper {
 
-     @Mapping(source = "firstLastName", target = "pLastName")
-     @Mapping(source = "secondLastName", target = "mLastName")
-    void updateEntity(UserUpdateRequest dto, @MappingTarget User entity);
+     @Mapping(source = "firstLastName", target = "paternalLastName")
+     @Mapping(source = "secondLastName", target = "maternalLastName")
+     @Mapping(target = "id", ignore = true)
+    User updateEntity(UserUpdateRequest dto, @MappingTarget User entity);
 }

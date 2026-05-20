@@ -21,7 +21,7 @@ public class UserMapper {
         UserResponse dto = mapper.map(user, UserResponse.class);
         // Los apellido se concadenan porque la Response solo manejan un campo "lastName"
         dto.setLastNames(
-                user.getPLastName()+ " " + user.getMLastName());
+                user.getPaternalLastName()+ " " + user.getMaternalLastName());
         return dto;
     }
 
@@ -31,8 +31,8 @@ public class UserMapper {
         User user = new User();
         user.setPassword(dto.getPassword());
         user.setName(dto.getName());
-        user.setPLastName(dto.getFirstLastName());
-        user.setMLastName(dto.getSecondLastName());
+        user.setPaternalLastName(dto.getFirstLastName());
+        user.setMaternalLastName(dto.getSecondLastName());
         user.setEmail(dto.getEmail());
         return user;
     }

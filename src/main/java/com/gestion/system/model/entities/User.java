@@ -24,10 +24,10 @@ public class User {
     private String name;
 
      @Column(name = "paternal_last_name", nullable = false)
-    private String pLastName;
+    private String paternalLastName;
 
      @Column(name = "maternal_last_name", nullable = false)
-    private String mLastName;
+    private String maternalLastName;
 
      @Column(name = "email", nullable = false)
     private String email;
