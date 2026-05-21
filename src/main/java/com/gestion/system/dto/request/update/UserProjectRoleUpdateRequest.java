@@ -11,8 +11,6 @@ import lombok.*;
 public class UserProjectRoleUpdateRequest {
 
      @Positive
-    private Integer userProject;
-     @Positive
     private Integer role;
 
 }

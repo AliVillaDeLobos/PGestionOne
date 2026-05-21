@@ -28,7 +28,7 @@ public class UserProjectRoleMapper {
                 .build();
     }
 
-    public UserProjectRole responseToEntity(UserProject userProject, Roles role){
+    public UserProjectRole requestToEntity(UserProject userProject, Roles role){
         if (userProject == null || role == null)
             throw new IllegalArgumentException("UserProject or Role cannot be null");
         return UserProjectRole.builder()
@@ -42,5 +42,11 @@ public class UserProjectRoleMapper {
                 : entities.stream().map(this::toResponse).toList();
     }
 
+
+    public UserProjectRole updateEntity(Roles role, UserProjectRole entity){
+        if (entity == null) return null;
+        if (role != null) entity.setRole(role);
+        return entity;
+    }
 
 }
