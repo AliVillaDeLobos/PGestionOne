@@ -17,11 +17,11 @@ public class UserRole {
      @Column(name = "id_user_role")
     private Integer id;
 
-      @ManyToOne(fetch = FetchType.LAZY)
-      @JoinColumn(name = "id_user", nullable = false)
-     private User user;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "id_user", nullable = false)
+    private User user;
 
-      @ManyToOne(fetch = FetchType.LAZY)
-      @JoinColumn(name = "id_role", nullable = false)
-     private Roles role;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "id_role", nullable = false)
+    private Roles role;
 }

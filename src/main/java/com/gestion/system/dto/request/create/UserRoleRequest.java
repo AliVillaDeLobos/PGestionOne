@@ -9,12 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserProjectRoleRequest {
+public class UserRoleRequest {
 
-     @NotNull(message = "UserProject ID is required.")
+     @NotNull(message = "USER ID is required.")
      @Positive
-    private Integer userProjectId;
-     @NotNull(message = "Role is requeried.")
+    private Integer userId;
+
+     @NotNull(message = "ROLE ID is required.")
      @Positive
     private Integer roleId;
 
