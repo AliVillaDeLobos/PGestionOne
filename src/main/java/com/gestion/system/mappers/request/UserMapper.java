@@ -26,10 +26,8 @@ public class UserMapper {
     }
 
     public User requestToEntity (UserRequest dto){
-    //El Mapper no maneja de forma correcta los campos compuestos, por eso se hizo manualmente
         if (dto == null) {return null;}
         User user = new User();
-        user.setPassword(dto.getPassword());
         user.setName(dto.getName());
         user.setPaternalLastName(dto.getFirstLastName());
         user.setMaternalLastName(dto.getSecondLastName());

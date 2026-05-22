@@ -30,7 +30,7 @@ public class AuditMapper {
             dto.setOldData(audit.getOldData());
             dto.setNewData(audit.getNewData());
 
-            dto.setCreatedBy(
+        dto.setCreatedBy(
                 userMapper.toResponse(audit.getUserCreated()));
         return dto;
     }
