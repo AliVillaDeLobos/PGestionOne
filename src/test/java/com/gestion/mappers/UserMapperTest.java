@@ -65,6 +65,8 @@ public class UserMapperTest {
             dto.setFirstLastName("Lopez");
             dto.setSecondLastName("Villalobos");
 
+            assertNull(entity.getPaternalLastName());
+
             User result = updateMapper.updateEntity(dto, entity);
 
             assertEquals("Lopez", result.getPaternalLastName());

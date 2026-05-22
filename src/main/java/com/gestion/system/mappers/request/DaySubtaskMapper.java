@@ -31,8 +31,8 @@ public class DaySubtaskMapper {
     }
 
     public DaysSubtasks requestToEntity (DaySubtaskRequest daySubtaskRequest, Day day, Subtask subtask) {
-        if (subtask == null) throw new IllegalArgumentException("Subtask cannot be null");
-        return daySubtaskRequest == null || day == null  ?  null
+        if (subtask == null || day == null) throw new IllegalArgumentException("Subtask cannot be null");
+        return daySubtaskRequest == null   ?  null
                 : DaysSubtasks.builder().day(day).subtask(subtask).build();
     }
 

@@ -11,7 +11,6 @@ import com.gestion.system.mappers.response.AuditMapper;
 import com.gestion.system.model.entities.Audit;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.Operation;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,11 +33,7 @@ public class AuditMapperTest {
     @InjectMocks
     private AuditMapper auditMapper;
 
-    @BeforeEach
-    void setUp() {
-        when(userMapper.toResponse(any()))
-                .thenReturn(new UserResponse());
-    }
+
 
     @Nested
     class ResponseTests {

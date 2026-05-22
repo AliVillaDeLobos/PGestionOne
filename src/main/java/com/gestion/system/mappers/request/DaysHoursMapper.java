@@ -13,13 +13,18 @@ import java.util.List;
 @Component
 public class DaysHoursMapper {
     private final ModelMapper mapper;
+    private final DaySubtaskMapper daySubtaskMapper;
 
-    public DaysHoursMapper(ModelMapper mapper) {
+    public DaysHoursMapper(ModelMapper mapper, DaySubtaskMapper daySubtaskMapper) {
         this.mapper = mapper;
+        this.daySubtaskMapper = daySubtaskMapper;
     }
 
     public DaysHoursResponse toResponse(DaysHours daysHours) {
-        return daysHours == null ? null : mapper.map(daysHours, DaysHoursResponse.class);
+        if ( daysHours == null) return  null;
+        DaysHoursResponse dto = mapper.map(daysHours, DaysHoursResponse.class);
+        dto.setDaySubtask(daySubtaskMapper.toResponse(daysHours.getDaySubtask()));
+        return dto;
     }
 
     public DaysHours requestToEntity(DaysHoursRequest request, DaysSubtasks daysSubtasks ) {
