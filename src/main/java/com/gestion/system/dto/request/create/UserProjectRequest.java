@@ -12,11 +12,11 @@ import lombok.*;
 @Builder
 public class UserProjectRequest {
 
-     @NotNull(message = "Usuer ID is required.")
+     @NotNull(message = "User ID is required.")
      @Positive
     private Integer userId;
 
-     @NotNull(message = "Usuer ID is required.")
+     @NotNull(message = "User ID is required.")
      @Positive
     private Integer projectId;
 }

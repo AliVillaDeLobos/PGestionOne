@@ -33,10 +33,9 @@ public class UserProjectMapper {
                 : entity.stream().map(this::toResponse).toList();
     }
 
-    public UserProject requestToEntity(UserProjectRequest dto, User user, Project project) {
+    public UserProject requestToEntity(User user, Project project) {
         if (user == null || project == null) throw new IllegalArgumentException("User and Project requests can't be null");
-        return dto == null ? null
-                : UserProject.builder()
+        return UserProject.builder()
                 .user(user)
                 .project(project)
                 .build();

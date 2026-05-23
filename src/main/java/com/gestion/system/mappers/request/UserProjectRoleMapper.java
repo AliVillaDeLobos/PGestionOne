@@ -1,5 +1,6 @@
 package com.gestion.system.mappers.request;
 
+import com.gestion.system.dto.request.update.UserProjectRoleUpdateRequest;
 import com.gestion.system.dto.response.UserProjectRoleResponse;
 import com.gestion.system.mappers.response.RolesMapper;
 import com.gestion.system.model.entities.Roles;
@@ -43,9 +44,9 @@ public class UserProjectRoleMapper {
     }
 
 
-    public UserProjectRole updateEntity(Roles role, UserProjectRole entity){
-        if (entity == null) return null;
-        if (role != null) entity.setRole(role);
+    public UserProjectRole updateEntity(UserProjectRole entity, Roles role){
+        if (role == null || entity == null) throw new IllegalArgumentException("Role and Entity to Update cannot be null");
+        entity.setRole(role);
         return entity;
     }
 
