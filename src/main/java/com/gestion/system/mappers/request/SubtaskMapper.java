@@ -27,7 +27,8 @@ public class SubtaskMapper {
     }
 
     public Subtask requestToEntity(SubtaskRequest subtaskRequest, Tasks task) {
-        return subtaskRequest == null || task == null ?  null
+        if ( task == null) throw new IllegalArgumentException("Task cannot be null");
+        return subtaskRequest == null ?  null
             : Subtask.builder()
                 .name(subtaskRequest.getName())
                 .description(subtaskRequest.getDescription())

@@ -14,10 +14,6 @@ import lombok.*;
 @Builder
 public class TaskAssignmentUpdateRequest {
 
-     @Positive
-    private Integer taskId;
-     @Positive
-    private Integer userId;
      @Enumerated(EnumType.STRING)
     private Role role;
 }

@@ -1,6 +1,7 @@
 package com.gestion.system.mappers.request;
 
 import com.gestion.system.dto.request.create.TaskAssignmentRequest;
+import com.gestion.system.dto.request.update.TaskAssignmentUpdateRequest;
 import com.gestion.system.dto.response.TaskAssignmentResponse;
 import com.gestion.system.model.entities.TaskAssignment;
 import com.gestion.system.model.entities.Tasks;
@@ -46,5 +47,9 @@ public class TaskAssignmentMapper {
                 : entities.stream().map(this::toResponse).toList();
     }
 
-
+    public TaskAssignment updateEntity(TaskAssignmentUpdateRequest request, TaskAssignment entity) {
+        if (entity == null || request == null) throw new IllegalArgumentException("Entity o TaskAssignment request cannot be null in TaskAssignmentUpdateRequest.");
+        entity.setRole(request.getRole());
+        return entity;
+    }
 }
