@@ -1,6 +1,5 @@
 package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.create.UserRoleRequest;
 import com.gestion.system.dto.response.UserRoleResponse;
 import com.gestion.system.mappers.response.RolesMapper;
 import com.gestion.system.model.entities.Roles;
@@ -23,6 +22,7 @@ public class UserRoleMapper {
     public UserRoleResponse toResponse(UserRole entity) {
         return entity == null ? null
                 : UserRoleResponse.builder()
+                .id(entity.getId())
                 .user(userMapper.toResponse(entity.getUser()))
                 .role(rolesMapper.toResponse(entity.getRole()))
                 .build();

@@ -1,6 +1,5 @@
 package com.gestion.mappers;
 
-import com.gestion.system.dto.request.create.UserProjectRequest;
 import com.gestion.system.dto.response.UserProjectResponse;
 import com.gestion.system.mappers.request.ProjectMapper;
 import com.gestion.system.mappers.request.UserMapper;
@@ -8,13 +7,10 @@ import com.gestion.system.mappers.request.UserProjectMapper;
 import com.gestion.system.model.entities.Project;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.entities.UserProject;
-import jakarta.persistence.PreUpdate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
-
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
