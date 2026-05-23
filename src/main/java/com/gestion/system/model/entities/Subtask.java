@@ -16,23 +16,24 @@ public class Subtask {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idSubtask;
+     @Column(name = "id_subtask")
+    private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_task", nullable = false)
-    private Tasks tasks;
+    private Tasks task;
 
-     @Column (name = "description", nullable = false)
+     @Column (name = "description")
     private String description;
 
      @Column(name = "name", nullable = false)
     private String name;
 
-     @Column(name = "status", nullable = false)
-    private Boolean status;
+     @Column(name = "completed", nullable = false)
+    private Boolean completed;
 
      @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private LocalDate startDate;  //Es la fecha de creacion del la Subtarea
 
      @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;

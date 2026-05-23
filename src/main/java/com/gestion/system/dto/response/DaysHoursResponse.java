@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 public class DaysHoursResponse {
 
+    private Integer id;
     private DaySubtaskResponse daySubtask;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

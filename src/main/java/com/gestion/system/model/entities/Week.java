@@ -20,7 +20,8 @@ public class Week {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idWeek;
+     @Column(name = "id_week")
+    private Integer id;
 
      @Column( name = "week_num", updatable = false)
     private Integer weekNum;

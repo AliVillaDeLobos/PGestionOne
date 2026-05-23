@@ -1,6 +1,7 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.response;
 
 import com.gestion.system.dto.response.AuditResponse;
+import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.model.entities.Audit;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +17,10 @@ public class AuditMapper {
         this.userMapper = userMapper;
     }
 
-    //Entidad a DTO
     public AuditResponse toResponse(Audit audit) {
         if (audit == null) {return null;}
         AuditResponse dto = new AuditResponse();
-            dto.setId(audit.getIdAudit());
+            dto.setId(audit.getId());
             dto.setTableName(audit.getTableName());
             dto.setRecordId(audit.getRecordId());
             dto.setAction(audit.getOperation());
@@ -30,13 +30,12 @@ public class AuditMapper {
             dto.setOldData(audit.getOldData());
             dto.setNewData(audit.getNewData());
 
-            dto.setCreatedBy(
+        dto.setCreatedBy(
                 userMapper.toResponse(audit.getUserCreated()));
         return dto;
     }
 
-    //Lista de Entity a DTO
-    public List<AuditResponse> toResponseList(List<Audit> audits) {
+    public List<AuditResponse> listResponse(List<Audit> audits) {
         if (audits == null || audits.isEmpty()) {return List.of();}
         return audits.stream().map(this::toResponse).collect(Collectors.toList());
     }

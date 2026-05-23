@@ -1,4 +1,4 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.response;
 
 import com.gestion.system.dto.response.WeekResponse;
 import com.gestion.system.model.entities.Week;
@@ -24,7 +24,7 @@ public class WeekMapper {
     }
 
     //List de Response
-    public List<WeekResponse> toResponseList(List<Week> weeks) {
+    public List<WeekResponse> listResponse(List<Week> weeks) {
         return weeks == null ? List.of() : weeks.stream().map(this::toResponse).toList();
     }
 }

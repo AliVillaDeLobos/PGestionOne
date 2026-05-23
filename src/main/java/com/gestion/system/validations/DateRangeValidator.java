@@ -28,16 +28,25 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, O
             start.setAccessible(true);
             end.setAccessible(true);
 
-            LocalDateTime startDate = (LocalDateTime) start.get(obj);
-            LocalDateTime endDate = (LocalDateTime) end.get(obj);
+            //Se usa Object para comparar de forma general los campos Date
+            Object startValue =  start.get(obj);
+            Object endValue =  end.get(obj);
 
-            if ( startDate == null || endDate == null){
+            if ( startValue == null || endValue == null)
                 return true; //Se deja tru porque la regla de null se evalua con @NotNull, no aquí
-            }
 
-            return endDate.isBefore(startDate);
+            if (!startValue.getClass().equals(endValue.getClass()))
+                return false;
 
-        }catch (Exception e) {
+            if (!(startValue instanceof Comparable))
+                    return false;
+
+            Comparable startComp = (Comparable) startValue;
+            Comparable endComp = (Comparable) endValue;
+
+            return endComp.compareTo(startComp) >= 0;
+
+        }catch (NoSuchFieldException | IllegalAccessException e) {
             return false;
         }
 

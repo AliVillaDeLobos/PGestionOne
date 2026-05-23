@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class DaySubtaskResponse {
 
+    private Integer id;
     private SubtaskResponse subtask;
     private Status status;
     private DayResponse day;

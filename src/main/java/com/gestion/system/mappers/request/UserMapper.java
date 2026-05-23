@@ -1,6 +1,6 @@
-package com.gestion.system.mappers;
+package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.UserRequest;
+import com.gestion.system.dto.request.create.UserRequest;
 import com.gestion.system.dto.response.UserResponse;
 import com.gestion.system.model.entities.User;
 import org.modelmapper.ModelMapper;
@@ -21,30 +21,28 @@ public class UserMapper {
         UserResponse dto = mapper.map(user, UserResponse.class);
         // Los apellido se concadenan porque la Response solo manejan un campo "lastName"
         dto.setLastNames(
-                user.getPLastName()+ " " + user.getMLastName());
+                user.getPaternalLastName()+ " " + user.getMaternalLastName());
         return dto;
     }
 
-    public User toRequest (UserRequest dto){
-    //El Mapper no maneja de forma correcta los campos compuestos, por eso se hizo manualmente
+    public User requestToEntity (UserRequest dto){
         if (dto == null) {return null;}
         User user = new User();
-        user.setPassword(dto.getPassword());
         user.setName(dto.getName());
-        user.setPLastName(dto.getFirstLastName());
-        user.setMLastName(dto.getSecondLastName());
+        user.setPaternalLastName(dto.getFirstLastName());
+        user.setMaternalLastName(dto.getSecondLastName());
         user.setEmail(dto.getEmail());
         return user;
     }
 
 
-    public List<User> toRequestList (List<UserRequest> dtos){
+    public List<User> listRequest (List<UserRequest> dtos){
         // Se regresa lista  vacia para evitar el NullPointer, en la serealización JSON
         if (dtos == null) return List.of();
-        return dtos.stream().map(this::toRequest).toList();
+        return dtos.stream().map(this::requestToEntity).toList();
     }
 
-    public List<UserResponse> toResponseList (List<User> users){
+    public List<UserResponse> listResponse (List<User> users){
         if (users == null) return List.of();
         return users.stream().map(this::toResponse).toList();
     }

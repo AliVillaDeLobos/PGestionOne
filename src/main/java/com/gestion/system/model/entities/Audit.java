@@ -23,7 +23,8 @@ public class Audit {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAudit;
+     @Column(name = "id_audit")
+    private Integer id;
 
      @Column(name = "table_name", nullable = false)
     private String tableName;
@@ -40,11 +41,11 @@ public class Audit {
     private User userCreated;
 
      @JdbcTypeCode(SqlTypes.JSON)
-     @Column(columnDefinition = "JSON")
+     @Column(columnDefinition = "LONGTEXT")
     private JsonNode oldData;
 
      @JdbcTypeCode(SqlTypes.JSON)
-     @Column(columnDefinition = "JSON")
+     @Column(columnDefinition = "LONGTEXT")
     private JsonNode newData;
 
      @CreationTimestamp //El campo será llenado cuando entre en la DB en automatico

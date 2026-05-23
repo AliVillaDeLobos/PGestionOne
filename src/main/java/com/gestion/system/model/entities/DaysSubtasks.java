@@ -15,13 +15,15 @@ public class DaysSubtasks {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDaySubtask;
+     @Column(name = "id_day_subtask")
+     private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "id_subtask", nullable = true) //Por defecto esta en PENDING EN DB
+     @JoinColumn(name = "id_subtask", nullable = false)
     private Subtask subtask;
 
-     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status") //Por defecto esta en PENDING EN DB
     private Status status;
 
 

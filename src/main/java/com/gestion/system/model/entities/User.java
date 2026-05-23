@@ -14,7 +14,8 @@ public class User {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUser;
+     @Column(name = "id_user")
+    private Integer id;
 
      @Column(name = "user_password", nullable = false)
     private String password;
@@ -23,10 +24,10 @@ public class User {
     private String name;
 
      @Column(name = "paternal_last_name", nullable = false)
-    private String pLastName;
+    private String paternalLastName;
 
      @Column(name = "maternal_last_name", nullable = false)
-    private String mLastName;
+    private String maternalLastName;
 
      @Column(name = "email", nullable = false)
     private String email;

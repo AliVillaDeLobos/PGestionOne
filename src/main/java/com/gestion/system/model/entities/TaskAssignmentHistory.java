@@ -17,7 +17,8 @@ public class TaskAssignmentHistory {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTaskAssignmentHistory;
+     @Column(name = "id_task_assignment_history")
+    private Integer id;
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_task", nullable = false)

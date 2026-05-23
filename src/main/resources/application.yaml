@@ -1,12 +1,20 @@
 spring:
   application:
     name: PGestionOne
+
   datasource:
-    url: jdbc:mariadb://localhost:3010/pgestion_one
+    url: jdbc:mariadb://localhost:3310/pgestion_one
     username: ${DB_USER}
     password: ${DB_PASS}
+
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
+  #      ddl-auto: validate #SOLO SE USA CON FLYWAY ACTIVO
   flyway:
-    baseline-on-migrate: true
+    enabled: false
+#    url: jdbc:mariadb://localhost:3310/pgestion_one
+#    user: ${DB_USER}
+#    password: ${DB_PASS}
+#    baseline-on-migrate: true
+#    locations: classpath:db/migration

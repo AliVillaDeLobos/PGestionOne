@@ -19,7 +19,7 @@ public class Day {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_day")
-    private Integer idDays;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_week", nullable = false)
