@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse create(UserRequest userRequest, Integer createUserId) {
-        User user = userMapper.requestToEntity(userRequest);
         User userCreate = usersRepository.findById(createUserId).orElseThrow(
                 () -> new ResourceNotFoundException("User not found"));
+        User user = userMapper.requestToEntity(userRequest);
 
         User savedUser = usersRepository.save(user);
         UserResponse response = userMapper.toResponse(savedUser);
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
         User target = usersRepository.findById(targetId).orElseThrow(() ->
                 new ResourceNotFoundException("User not found with ID: " + targetId));
 
-        userAuthorization.validateDeletePermission(target, requester);
+        userAuthorization.validateDeleteUserPermission(target, requester);
 
         auditService.delete(AuditableEntity.USER, target.getId(), requester, userMapper.toResponse(target));
 

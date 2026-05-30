@@ -1,25 +1,32 @@
 package com.gestion.system.model.enums;
 
+
+import lombok.Getter;
+
+@Getter
 public enum SystemRole {
     ROOT(1, 5),
-    MANAGER(2, 3),
     ADMIN(3, 4),
-    MEMBER(4, 2),
-    VIEWER(5, 1);
+    MANAGER(2, 3),
+    MEMBER(4, 2);
 
     private final Integer code;
-    private final Integer level;
+    private final Integer authorityLevel;
 
-    SystemRole(Integer code, Integer level) {
+    SystemRole(Integer code, Integer authorityLevel) {
         this.code = code;
-        this.level = level;
+        this.authorityLevel = authorityLevel;
     }
 
-    public Integer getCode() {
-        return code;
+    public boolean canModifyEntities(){
+        return authorityLevel >= MANAGER.getAuthorityLevel();
     }
 
-    public Integer getLevel() {
-        return level;
+    public boolean canDeleteUsers() {
+        return authorityLevel >= ADMIN.getAuthorityLevel();
+    }
+
+    public boolean canDeleteAdmins() {
+        return authorityLevel >= ADMIN.getAuthorityLevel();
     }
 }
