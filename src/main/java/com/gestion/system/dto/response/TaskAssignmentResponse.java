@@ -1,7 +1,7 @@
 package com.gestion.system.dto.response;
 
 
-import com.gestion.system.model.enums.Role;
+import com.gestion.system.model.enums.ProjectRoles;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -16,6 +16,6 @@ public class TaskAssignmentResponse {
     private Integer id;
     private TaskResponse task;
     private UserResponse user;
-    private Role role;
+    private ProjectRoles projectRoles;
     private LocalDate assignedDate;
 }

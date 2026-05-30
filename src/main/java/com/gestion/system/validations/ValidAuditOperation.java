@@ -13,23 +13,22 @@ public class ValidAuditOperation implements ConstraintValidator<ValidAudit, Audi
     }
 
     @Override
-    public boolean isValid(Audit aduit, ConstraintValidatorContext context) {
-        if (aduit == null || aduit.getOperation() == null) {
+    public boolean isValid(Audit audit, ConstraintValidatorContext context) {
+        if (audit == null || audit.getOperation() == null) {
             return false;
         }
-
-             return switch (aduit.getOperation()) {
+             return switch (audit.getOperation()) {
 
                 case CREATE -> fail(context,
-                        aduit.getOldData() != null || aduit.getNewData() == null,
+                        audit.getOldData() != null || audit.getNewData() == null,
                         "CREATE: NewData cannot be null and OldData should be null");
 
                 case UPDATE -> fail(context,
-                        aduit.getOldData() == null || aduit.getNewData() == null,
+                        audit.getOldData() == null || audit.getNewData() == null,
                         "UPDATE: NewData and OldData cannot be null");
 
                 case DELETE -> fail(context,
-                        aduit.getOldData() == null || aduit.getNewData() != null,
+                        audit.getOldData() == null || audit.getNewData() != null,
                         "DELETE: OldData cannot be null and NewData should be null");
             };
 

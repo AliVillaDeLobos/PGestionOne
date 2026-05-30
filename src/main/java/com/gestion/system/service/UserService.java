@@ -1,0 +1,17 @@
+package com.gestion.system.service;
+
+import com.gestion.system.dto.request.create.UserRequest;
+import com.gestion.system.dto.request.update.ChangePasswordRequest;
+import com.gestion.system.dto.request.update.UserUpdateRequest;
+import com.gestion.system.dto.response.UserResponse;
+import com.gestion.system.model.entities.User;
+
+public interface UserService {
+    UserResponse  create(UserRequest userRequest, Integer createUserId);
+    UserResponse update(Integer userId, UserUpdateRequest userUpdate);
+    void updatePassword(Integer userId, ChangePasswordRequest changePasswordRequest);
+    User getById(Integer userId);
+    User getByEmail(String email);
+    void delete(Integer userId, Integer adminId);
+
+}

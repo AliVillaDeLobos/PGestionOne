@@ -22,6 +22,7 @@ public class UserMapper {
         // Los apellido se concadenan porque la Response solo manejan un campo "lastName"
         dto.setLastNames(
                 user.getPaternalLastName()+ " " + user.getMaternalLastName());
+        dto.setRole(user.getSystemRole().name());
         return dto;
     }
 
@@ -35,12 +36,12 @@ public class UserMapper {
         return user;
     }
 
-
+/*
     public List<User> listRequest (List<UserRequest> dtos){
         // Se regresa lista  vacia para evitar el NullPointer, en la serealización JSON
         if (dtos == null) return List.of();
         return dtos.stream().map(this::requestToEntity).toList();
-    }
+    }*/
 
     public List<UserResponse> listResponse (List<User> users){
         if (users == null) return List.of();

@@ -1,12 +1,9 @@
 package com.gestion.mappers;
 
-import com.gestion.system.dto.response.UserRoleResponse;
 import com.gestion.system.mappers.request.UserMapper;
-import com.gestion.system.mappers.request.UserRoleMapper;
 import com.gestion.system.mappers.response.RolesMapper;
 import com.gestion.system.model.entities.Roles;
 import com.gestion.system.model.entities.User;
-import com.gestion.system.model.entities.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

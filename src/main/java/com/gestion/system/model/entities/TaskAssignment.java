@@ -1,6 +1,6 @@
 package com.gestion.system.model.entities;
 
-import com.gestion.system.model.enums.Role;
+import com.gestion.system.model.enums.ProjectRoles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,8 +29,8 @@ public class TaskAssignment {
     private User user;
 
      @Enumerated(EnumType.STRING)
-     @Column (name = "role", nullable = false)
-    private Role role;
+     @Column (name = "assignment_type", nullable = false)
+    private ProjectRoles projectRoles;
 
      @Column(name = "assigned_date", nullable = false)
     private LocalDate assignedDate;

@@ -4,8 +4,8 @@ package com.gestion.mappers;
 import com.gestion.system.dto.request.create.DaysHoursRequest;
 import com.gestion.system.mappers.request.DaySubtaskMapper;
 import com.gestion.system.mappers.request.DaysHoursMapper;
+import com.gestion.system.model.entities.DaySubtasks;
 import com.gestion.system.model.entities.DaysHours;
-import com.gestion.system.model.entities.DaysSubtasks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,6 @@ import org.modelmapper.ModelMapper;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DaysHoursTest {
@@ -43,7 +42,7 @@ public class DaysHoursTest {
         @Test
         void shouldMapRequesToEntity(){
             DaysHoursRequest daysHoursRequest = new DaysHoursRequest();
-            DaysSubtasks subtasks = new DaysSubtasks();
+            DaySubtasks subtasks = new DaySubtasks();
 
             DaysHours entity = mapper.requestToEntity(daysHoursRequest, subtasks);
 
@@ -63,7 +62,7 @@ public class DaysHoursTest {
         @Test
         void shouldMapListToEntityCorrectly(){
             DaysHoursRequest daysHoursRequest = new DaysHoursRequest();
-            DaysSubtasks subtasks = new DaysSubtasks();
+            DaySubtasks subtasks = new DaySubtasks();
 
             List<DaysHours> resultList = mapper.listEntity(List.of(daysHoursRequest), subtasks);
 

@@ -38,7 +38,7 @@ public class TaskAssignmentMapper {
                 : TaskAssignment.builder()
                 .task(task)
                 .user(user)
-                .role(request.getRole())
+                .projectRoles(request.getProjectRoles())
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class TaskAssignmentMapper {
 
     public TaskAssignment updateEntity(TaskAssignmentUpdateRequest request, TaskAssignment entity) {
         if (entity == null || request == null) throw new IllegalArgumentException("Entity o TaskAssignment request cannot be null in TaskAssignmentUpdateRequest.");
-        entity.setRole(request.getRole());
+        entity.setProjectRoles(request.getProjectRoles());
         return entity;
     }
 }

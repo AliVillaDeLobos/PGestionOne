@@ -1,9 +1,8 @@
 package com.gestion.system.dto.request.update;
 
-import com.gestion.system.model.enums.Role;
+import com.gestion.system.model.enums.ProjectRoles;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 
@@ -15,5 +14,5 @@ import lombok.*;
 public class TaskAssignmentUpdateRequest {
 
      @Enumerated(EnumType.STRING)
-    private Role role;
+    private ProjectRoles projectRoles;
 }

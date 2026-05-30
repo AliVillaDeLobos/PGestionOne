@@ -1,6 +1,6 @@
 package com.gestion.system.model.enums;
 
-public enum Role {
+public enum ProjectRoles {
     RESPONSIBLE,
     SUPPORT,
     REVIEWER
