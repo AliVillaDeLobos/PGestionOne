@@ -58,11 +58,11 @@ Validations
 ## Getting Started
 Clone the repository
 
-""" 
+```bash
 git clone https://github.com/AliVillaDeLobos/PGestionOne.git
 
 mvn spring-boot:run
-"""
+```
 
 ---
 
