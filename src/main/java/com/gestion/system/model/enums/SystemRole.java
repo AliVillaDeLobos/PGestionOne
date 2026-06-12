@@ -22,6 +22,10 @@ public enum SystemRole {
         return authorityLevel >= MANAGER.getAuthorityLevel();
     }
 
+    public boolean hasAuthority(SystemRole requiredRole){
+        return this.authorityLevel >= requiredRole.getAuthorityLevel();
+    }
+
     public boolean canDeleteUsers() {
         return authorityLevel >= ADMIN.getAuthorityLevel();
     }

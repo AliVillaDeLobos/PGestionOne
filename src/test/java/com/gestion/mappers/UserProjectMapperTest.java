@@ -4,7 +4,7 @@ import com.gestion.system.dto.response.UserProjectResponse;
 import com.gestion.system.mappers.request.ProjectMapper;
 import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.mappers.request.UserProjectMapper;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.entities.UserProject;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,8 +31,8 @@ public class UserProjectMapperTest {
         @Test
         void shouldMapEntitiesToResponseCorrectly(){
             User user = User.builder().id(8).name("Aldo").build();
-            Project project = Project.builder().id(2).name("Volaris Application").build();
-            UserProject entity = UserProject.builder().id(1).user(user).project(project).build();
+            Projects projects = Projects.builder().id(2).name("Volaris Application").build();
+            UserProject entity = UserProject.builder().id(1).user(user).projects(projects).build();
 
             UserProjectResponse response = mapper.toResponse(entity);
 
@@ -47,19 +47,19 @@ public class UserProjectMapperTest {
         @Test
         void  shouldMapEntitiesToRequestCorrectly(){
             User user = User.builder().id(8).name("Aldo").build();
-            Project project = Project.builder().id(2).name("Volaris Application").build();
+            Projects projects = Projects.builder().id(2).name("Volaris Application").build();
 
-            UserProject result = mapper.requestToEntity(user, project);
+            UserProject result = mapper.requestToEntity(user, projects);
 
             assertNotNull(result);
             assertEquals(8, result.getUser().getId());
-            assertEquals(2, result.getProject().getId());
+            assertEquals(2, result.getProjects().getId());
         }
 
         @Test
         void shouldThrowExceptionWhenEntityIsNull(){
             assertThrows(IllegalArgumentException.class,
-                    () -> mapper.requestToEntity(null, new Project()));
+                    () -> mapper.requestToEntity(null, new Projects()));
         }
     }
 

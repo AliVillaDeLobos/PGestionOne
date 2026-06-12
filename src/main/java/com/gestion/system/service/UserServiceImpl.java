@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
         userAuthorization.validateDeleteUserPermission(target, requester);
 
-        auditService.delete(AuditableEntity.USER, target.getId(), requester, userMapper.toResponse(target));
+        auditService.delete(AuditableEntity.USER, target.getId(), requester, userUpdateMapper.toAudit(target));
 
         usersRepository.delete(target);
     }

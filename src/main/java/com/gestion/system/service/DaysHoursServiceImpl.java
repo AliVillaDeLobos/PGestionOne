@@ -1,5 +1,6 @@
 package com.gestion.system.service;
 
+import com.gestion.system.dto.audit.DayHoursAuditModel;
 import com.gestion.system.dto.request.create.DaysHoursRequest;
 import com.gestion.system.dto.request.update.DaysHoursUpdateRequest;
 import com.gestion.system.dto.response.DaysHoursResponse;
@@ -10,6 +11,7 @@ import com.gestion.system.model.entities.DaySubtasks;
 import com.gestion.system.model.entities.DaysHours;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.AuditableEntity;
+import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.DaysHoursRepository;
 import com.gestion.system.repositories.DaysSubtasksRepository;
 import lombok.AllArgsConstructor;
@@ -35,12 +37,12 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     public DaysHoursResponse create(DaysHoursRequest daysHoursRequest,Integer daySubtaskId , Integer userId) {
         DaySubtasks daySubtasks =  daysSubtasksRepository.findById(daySubtaskId).orElseThrow(
                 () -> new ResourceNotFoundException("DaySubtask not found with ID: " + daySubtaskId));
-        User user = userAuthorization.getAuthorizedUser(userId);
+        User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
         DaysHours dh = daysHoursMapper.requestToEntity(daysHoursRequest, daySubtasks);
         DaysHours saved = daysHoursRepository.save(dh);
 
         DaysHoursResponse response = daysHoursMapper.toResponse(saved);
-        auditService.create(AuditableEntity.DAYS_HOURS, response.getId(), user, response);
+        auditService.create(AuditableEntity.DAYS_HOURS, response.getId(), user, daysHoursUpdateMapper.toAudit(saved));
         return response;
     }
 
@@ -49,14 +51,14 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     public DaysHoursResponse update(Integer currentId, DaysHoursUpdateRequest requestDto, Integer userId) {
         DaysHours daysHours = daysHoursRepository.findById(currentId).orElseThrow(
                 () -> new ResourceNotFoundException("DaysHours not found with ID: " + currentId));
-        User user = userAuthorization.getAuthorizedUser(userId);
-
+        User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
+        DayHoursAuditModel original = daysHoursUpdateMapper.toAudit(daysHours);
         DaysHours update = daysHoursUpdateMapper.updateEntity(requestDto, daysHours);
         DaysHours saved = daysHoursRepository.save(update);
         DaysHoursResponse response = daysHoursMapper.toResponse(saved);
 
         auditService.update(AuditableEntity.DAYS_HOURS, response.getId(), user
-                ,daysHoursMapper.toResponse(daysHours), response);
+                ,original, daysHoursUpdateMapper.toAudit(saved));
         return response;
     }
 
@@ -80,10 +82,10 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     public void delete(Integer idDayHour, Integer userId) {
         DaysHours daysHours =  daysHoursRepository.findById(idDayHour).orElseThrow(
                 () -> new ResourceNotFoundException("DayHour not found with ID: " + idDayHour));
-        User user = userAuthorization.getAuthorizedUser(userId);
+        User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
 
         auditService.delete(AuditableEntity.DAYS_HOURS, daysHours.getId(),
-                user, daysHoursMapper.toResponse(daysHours));
+                user, daysHoursUpdateMapper.toAudit(daysHours));
 
         daysHoursRepository.delete(daysHours);
     }
