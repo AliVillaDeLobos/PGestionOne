@@ -10,8 +10,9 @@ public interface UserService {
     UserResponse  create(UserRequest userRequest, Integer createUserId);
     UserResponse update(Integer userId, UserUpdateRequest userUpdate);
     void updatePassword(Integer userId, ChangePasswordRequest changePasswordRequest);
-    User getById(Integer userId);
-    User getByEmail(String email);
+    UserResponse getById(Integer userId);
+    UserResponse getByEmail(String email);
     void delete(Integer userId, Integer adminId);
+    User findUser(Integer idUser);
 
 }

@@ -25,7 +25,7 @@ import java.util.List;
 public class DaysHoursServiceImpl implements DaysHoursService {
     private final DaysHoursRepository daysHoursRepository;
     private final DaysHoursMapper daysHoursMapper;
-    private final DaysSubtasksRepository daysSubtasksRepository;
+    private final DaySubtaskService daySubtaskService;
     private final AuditService auditService;
     private final DaysHoursUpdateMapper daysHoursUpdateMapper;
 
@@ -35,8 +35,7 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     @Override
     @Transactional
     public DaysHoursResponse create(DaysHoursRequest daysHoursRequest,Integer daySubtaskId , Integer userId) {
-        DaySubtasks daySubtasks =  daysSubtasksRepository.findById(daySubtaskId).orElseThrow(
-                () -> new ResourceNotFoundException("DaySubtask not found with ID: " + daySubtaskId));
+        DaySubtasks daySubtasks =  daySubtaskService.findDaySubtask(daySubtaskId);
         User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
         DaysHours dh = daysHoursMapper.requestToEntity(daysHoursRequest, daySubtasks);
         DaysHours saved = daysHoursRepository.save(dh);
@@ -49,8 +48,7 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     @Override
     @Transactional
     public DaysHoursResponse update(Integer currentId, DaysHoursUpdateRequest requestDto, Integer userId) {
-        DaysHours daysHours = daysHoursRepository.findById(currentId).orElseThrow(
-                () -> new ResourceNotFoundException("DaysHours not found with ID: " + currentId));
+        DaysHours daysHours = findDayHours(currentId);
         User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
         DayHoursAuditModel original = daysHoursUpdateMapper.toAudit(daysHours);
         DaysHours update = daysHoursUpdateMapper.updateEntity(requestDto, daysHours);
@@ -65,8 +63,7 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     @Override
     @Transactional(readOnly = true)
     public DaysHoursResponse getById(Integer idDayHours) {
-        DaysHours daysHours = daysHoursRepository.findById(idDayHours).orElseThrow(
-                () -> new ResourceNotFoundException("DaysHours not found with ID: " + idDayHours));
+        DaysHours daysHours = findDayHours(idDayHours);
         return daysHoursMapper.toResponse(daysHours);
     }
 
@@ -80,8 +77,7 @@ public class DaysHoursServiceImpl implements DaysHoursService {
     @Override
     @Transactional
     public void delete(Integer idDayHour, Integer userId) {
-        DaysHours daysHours =  daysHoursRepository.findById(idDayHour).orElseThrow(
-                () -> new ResourceNotFoundException("DayHour not found with ID: " + idDayHour));
+        DaysHours daysHours =  findDayHours(idDayHour);
         User user = userAuthorization.authorizeUser(userId, SystemRole.MANAGER);
 
         auditService.delete(AuditableEntity.DAYS_HOURS, daysHours.getId(),
@@ -90,6 +86,9 @@ public class DaysHoursServiceImpl implements DaysHoursService {
         daysHoursRepository.delete(daysHours);
     }
 
-
-
+    @Override
+    public DaysHours findDayHours(Integer idDayHours) {
+        return daysHoursRepository.findById(idDayHours).orElseThrow(
+                () -> new ResourceNotFoundException("DaysHours not found with ID: " + idDayHours));
+    }
 }

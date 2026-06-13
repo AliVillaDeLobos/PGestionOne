@@ -9,4 +9,5 @@ public interface AuditService {
     void delete(AuditableEntity table, Integer recordId, User actor, Object oldData);
     void update(AuditableEntity table, Integer recordId, User actor, Object oldData, Object newData);
     void create (AuditableEntity table, Integer recordId, User actor, Object newData);
+    void restore(AuditableEntity table, Integer recordId, User actor, Object newData);
 }

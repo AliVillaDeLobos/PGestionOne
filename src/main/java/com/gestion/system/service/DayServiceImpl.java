@@ -21,17 +21,13 @@ public class DayServiceImpl implements DayService {
     @Transactional(readOnly = true)
     public List<DayResponse> getDaysByWeek(Integer weekId) {
         List<Day> daysResponse = daysRepository.findByWeek_Id(weekId);
-        if (daysResponse.isEmpty())
-            throw new ResourceNotFoundException("Days with week's ID not found.");
         return dayMapper.listResponse(daysResponse);
     }
 
     @Override
     @Transactional(readOnly = true)
     public DayResponse getDayResponseById(Integer idDay) {
-        Day day = daysRepository.findById(idDay).orElseThrow(
-                () -> new ResourceNotFoundException("Day not found with this ID: " + idDay));
-        return dayMapper.toResponse(day);
+        return dayMapper.toResponse(findDay(idDay));
     }
 
     @Override
@@ -40,5 +36,12 @@ public class DayServiceImpl implements DayService {
         Day day = daysRepository.findByDayNameAndWeek_Id(nameDay, weekId).orElseThrow(
                 () -> new ResourceNotFoundException("Day not found with this week's ID and name."));
         return dayMapper.toResponse(day);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Day findDay(Integer idDay) {
+        return daysRepository.findById(idDay).orElseThrow(
+                () -> new ResourceNotFoundException("Day not found with this ID: " + idDay));
     }
 }

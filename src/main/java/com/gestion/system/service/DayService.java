@@ -10,4 +10,5 @@ public interface DayService {
     List<DayResponse> getDaysByWeek(Integer weekId);
     DayResponse getDayResponseById(Integer idDay);
     DayResponse getDayByNameAndWeek_Id(String nameDay, Integer weekId);
+    Day findDay(Integer idDay);
 }

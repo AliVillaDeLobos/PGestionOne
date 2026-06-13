@@ -55,9 +55,9 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectResponse create(ProjectRequest projectRequest, Integer idUser) {
         User user = userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
         Projects project = projectMapper.requestToEntity(projectRequest);
-        Projects saved = projectRepository.save(project);
-        audit.create(AuditableEntity.PROJECT, saved.getId(), user, projectUpdateMapper.toAudit(saved));
-        return projectMapper.toResponse(saved);
+        projectRepository.save(project);
+        audit.create(AuditableEntity.PROJECT, project.getId(), user, projectUpdateMapper.toAudit(project));
+        return projectMapper.toResponse(project);
     }
 
     @Override
@@ -85,7 +85,9 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.delete(project);
     }
 
-    private Projects findProject(Integer idProject){
+    @Override
+    @Transactional(readOnly = true)
+    public Projects findProject(Integer idProject){
         return projectRepository.findById(idProject).orElseThrow(
                 () -> new ResourceNotFoundException("Project not found with ID: " + idProject));
     }

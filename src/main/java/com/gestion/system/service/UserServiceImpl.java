@@ -10,6 +10,7 @@ import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.mappers.update.UserUpdateMapper;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.AuditableEntity;
+import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,45 +30,44 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse create(UserRequest userRequest, Integer createUserId) {
-        User userCreate = usersRepository.findById(createUserId).orElseThrow(
-                () -> new ResourceNotFoundException("User not found"));
+        User userCreate = userAuthorization.authorizeUser(createUserId, SystemRole.ROOT);
         User user = userMapper.requestToEntity(userRequest);
 
-        User savedUser = usersRepository.save(user);
-        UserResponse response = userMapper.toResponse(savedUser);
+        user = usersRepository.save(user);
+        UserResponse response = userMapper.toResponse(user);
 
-        auditService.create(AuditableEntity.USER, savedUser.getId(), userCreate, response);
+        auditService.create(AuditableEntity.USER, user.getId(), userCreate, userUpdateMapper.toAudit(user));
         return response;
     }
 
     @Override
     @Transactional
     public UserResponse update(Integer userId, UserUpdateRequest userUpdate) {
-        User user = usersRepository.findById(userId).orElseThrow(() ->
-                new ResourceNotFoundException("User not found wiht ID: " + userId));
+        User user = findUser(userId);
         user = userUpdateMapper.updateEntity(userUpdate, user);
+        usersRepository.save(user);
         return userMapper.toResponse(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User getById(Integer userId)  {
-        return usersRepository.findById(userId).orElseThrow(() ->
-                new ResourceNotFoundException("User not found with ID: " + userId));
+    public UserResponse getById(Integer userId)  {
+        User user = findUser(userId);
+        return userMapper.toResponse(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User getByEmail(String email) {
-        return usersRepository.findByEmail(email).orElseThrow(() ->
+    public UserResponse getByEmail(String email) {
+        User user = usersRepository.findByEmail(email).orElseThrow(() ->
                 new ResourceNotFoundException("User not found with email: " + email));
+        return userMapper.toResponse(user);
     }
 
     @Override
     @Transactional
     public void updatePassword(Integer userId, ChangePasswordRequest changePasswordRequest) {
-        User user = usersRepository.findById(userId).orElseThrow(() ->
-                new ResourceNotFoundException("User not found with ID: " + userId));
+        User user = findUser(userId);
         passwordValidator(changePasswordRequest, user);
         user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
         usersRepository.save(user);
@@ -76,10 +76,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void delete(Integer targetId, Integer actingId) {
-        User requester = usersRepository.findById(actingId).orElseThrow(() ->
-                new ResourceNotFoundException("Admin not found with ID: " + actingId));
-        User target = usersRepository.findById(targetId).orElseThrow(() ->
-                new ResourceNotFoundException("User not found with ID: " + targetId));
+        User requester = findUser(actingId);
+        User target = findUser(targetId);
 
         userAuthorization.validateDeleteUserPermission(target, requester);
 
@@ -98,4 +96,10 @@ public class UserServiceImpl implements UserService {
             throw new PasswordInvalidateException("New password and old password cannot be the same.");
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public User findUser(Integer idUser){
+        return usersRepository.findById(idUser).orElseThrow(() ->
+                new ResourceNotFoundException("User not found with ID: " + idUser));
+    }
 }

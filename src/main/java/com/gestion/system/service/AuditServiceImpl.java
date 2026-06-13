@@ -60,4 +60,18 @@ public class AuditServiceImpl implements AuditService {
                 .build();
         auditRepository.save(audit);
     }
+
+    @Override
+    @Transactional
+    public void restore(AuditableEntity table, Integer recordId, User actor, Object newData) {
+        JsonNode json = objectMapper.valueToTree(newData);
+        Audit audit = Audit.builder()
+                .tableName(table.name())
+                .recordId(recordId)
+                .userCreated(actor)
+                .operation(Operation.RESTORE)
+                .newData(json)
+                .build();
+        auditRepository.save(audit);
+    }
 }
