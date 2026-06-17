@@ -15,7 +15,6 @@ import com.gestion.system.model.enums.AuditableEntity;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.SubtaskRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,29 +47,23 @@ public class SubtaskServiceImpl implements SubtaskService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<SubtaskResponse> getAllIsDeleted() {
-        List<Subtask> subtasks = subtaskRepository.findAllByIsDeleted(true);
+    public List<SubtaskResponse> getAllIsDeleted(Integer idTask) {
+        List<Subtask> subtasks = subtaskRepository.findAllByTask_IdAndIsDeleted(idTask, true);
+        return subtaskMapper.listResponse(subtasks);
+    }
+
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<SubtaskResponse> getAllNotCompleted(Integer idTask) {
+        List<Subtask> subtasks = subtaskRepository.findAllByTask_IdAndCompleted(idTask, false);
         return subtaskMapper.listResponse(subtasks);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<SubtaskResponse> getAllNotDelete() {
-        List<Subtask> subtasks = subtaskRepository.findAllByIsDeleted(false);
-        return subtaskMapper.listResponse(subtasks);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<SubtaskResponse> getAllNotCompleted() {
-        List<Subtask> subtasks = subtaskRepository.findAllByCompleted(false);
-        return subtaskMapper.listResponse(subtasks);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<SubtaskResponse> getAllCompleted() {
-        List<Subtask> subtasks = subtaskRepository.findAllByCompleted(true);
+    public List<SubtaskResponse> getAllCompleted(Integer idTask) {
+        List<Subtask> subtasks = subtaskRepository.findAllByTask_IdAndCompleted(idTask, true);
         return subtaskMapper.listResponse(subtasks);
     }
 
@@ -90,9 +83,10 @@ public class SubtaskServiceImpl implements SubtaskService{
 
     @Override
     @Transactional
-    public SubtaskResponse update(Integer idUser, Integer idSubtask, SubtaskUpdateRequest update) {
+    public SubtaskResponse update(Integer idUser, Integer idSubtask, SubtaskUpdateRequest update, Integer idTask) {
         User user = userAuthorization.authorizeUser(idUser, SystemRole.MEMBER);
-        Subtask subtask = findSubtask(idSubtask);
+        Subtask subtask = subtaskRepository.findByIdAndTask_Id(idSubtask, idTask).orElseThrow(
+                () -> new ResourceNotFoundException("Subtask not found in Task."));
         SubtaskAuditModel original = subtaskUpdateMapper.toAudit(subtask);
 
         subtaskUpdateMapper.updateEntity(update, subtask);
@@ -105,9 +99,10 @@ public class SubtaskServiceImpl implements SubtaskService{
 
     @Override
     @Transactional
-    public SubtaskResponse delete(Integer idUser, Integer idSubtask, String message) {
+    public SubtaskResponse delete(Integer idUser, Integer idSubtask, String message, Integer idTask) {
         User user = userAuthorization.authorizeUser(idUser, SystemRole.MANAGER);
-        Subtask subtask = findSubtask(idSubtask);
+        Subtask subtask = subtaskRepository.findByIdAndTask_Id(idSubtask, idTask).orElseThrow(
+                () -> new ResourceNotFoundException("Subtask not found in Task."));
 
         if (subtask.getIsDeleted()) throw new InvalidResourceStateException("Subtask already deleted.");
 

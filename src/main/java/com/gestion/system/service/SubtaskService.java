@@ -11,13 +11,12 @@ public interface SubtaskService {
 
     SubtaskResponse getById(int idSubtask);
     List<SubtaskResponse> getAllByTaskId(Integer idTask);
-    List<SubtaskResponse> getAllIsDeleted();
-    List<SubtaskResponse> getAllNotDelete();
-    List<SubtaskResponse> getAllNotCompleted();
-    List<SubtaskResponse> getAllCompleted();
+    List<SubtaskResponse> getAllIsDeleted(Integer idTask);
+    List<SubtaskResponse> getAllNotCompleted(Integer idTask);
+    List<SubtaskResponse> getAllCompleted(Integer idTask);
     SubtaskResponse create(Integer idUser, SubtaskRequest request, Integer idTask);
-    SubtaskResponse update(Integer idUser, Integer idSubtask, SubtaskUpdateRequest update);
-    SubtaskResponse delete(Integer idUser, Integer idSubtask, String message);
+    SubtaskResponse update(Integer idUser, Integer idSubtask, SubtaskUpdateRequest update, Integer idTask);
+    SubtaskResponse delete(Integer idUser, Integer idSubtask, String message, Integer idTask);
     SubtaskResponse restore(Integer idUser, Integer idSubtask);
     Subtask findSubtask(Integer idSubtask);
 }

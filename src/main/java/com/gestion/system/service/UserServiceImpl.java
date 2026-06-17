@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponse create(UserRequest userRequest, Integer createUserId) {
+    public UserResponse create(UserRequest userRequest, Integer createUserId, SystemRole role) {
         User userCreate = userAuthorization.authorizeUser(createUserId, SystemRole.ROOT);
         User user = userMapper.requestToEntity(userRequest);
-
+        user.setSystemRole(role);
         user = usersRepository.save(user);
         UserResponse response = userMapper.toResponse(user);
 

@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class DaySubtaskUpdateRequest {
 
-     @Positive(message = "EL Id no puede ser negativo.")
+     @Positive(message = "ID cannot be negative number.")
     private Integer idDay;
     private Status status;
 }

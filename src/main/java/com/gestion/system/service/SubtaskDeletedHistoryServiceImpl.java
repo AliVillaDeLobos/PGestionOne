@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class SubtaskDeletedHistoryServiceImpl implements SubtaskDeletedHistoryService {
     private final SubtaskDeletedHistoryRepository deletedHistoryRepository;
-    private final SubtaskService subtaskService;
 
     @Override
     @Transactional

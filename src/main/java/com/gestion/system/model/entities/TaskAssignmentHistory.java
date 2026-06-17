@@ -1,6 +1,7 @@
 package com.gestion.system.model.entities;
 
 import com.gestion.system.model.enums.Action;
+import com.gestion.system.model.enums.ProjectRoles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,5 +39,9 @@ public class TaskAssignmentHistory {
 
      @Column(name = "action_date", nullable = false)
     private LocalDateTime actionDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private ProjectRoles role;
 
 }

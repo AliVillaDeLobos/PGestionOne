@@ -13,7 +13,6 @@ import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.AuditableEntity;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.DaysHoursRepository;
-import com.gestion.system.repositories.DaysSubtasksRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
