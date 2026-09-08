@@ -40,7 +40,7 @@ public class AuditMapperTest {
         @Test
         void shouldMapperCorrectlyBasicsFields() {
             Audit audit = Audit.builder()
-                    .id(1)
+                    .id(1L)
                     .tableName("user")
                     .recordId(10)
                     .operation(Operation.DELETE)
@@ -113,7 +113,7 @@ public class AuditMapperTest {
         @Test
         void shouldMapListCorrectly(){
             Audit audit = new Audit();
-            audit.setId(4);
+            audit.setId(4L);
             audit.setTableName("user_project");
 
             List<AuditResponse> list = auditMapper.listResponse(List.of(audit));

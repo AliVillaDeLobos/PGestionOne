@@ -1,5 +1,6 @@
 package com.gestion.system.mappers.request;
 
+import com.gestion.system.dto.audit.UserProjectAuditModel;
 import com.gestion.system.dto.response.UserProjectResponse;
 import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.User;
@@ -33,11 +34,22 @@ public class UserProjectMapper {
     }
 
     public UserProject requestToEntity(User user, Projects projects) {
-        if (user == null || projects == null) throw new IllegalArgumentException("User and Project requests can't be null");
+        if (user == null || projects == null)
+            throw new IllegalArgumentException("User and Project requests can't be null");
         return UserProject.builder()
                 .user(user)
                 .projects(projects)
                 .build();
     }
 
+    public UserProjectAuditModel toAudit(UserProject entity) {
+        if (entity == null)
+            throw new IllegalArgumentException("UserProject can't be null");
+        return UserProjectAuditModel.builder()
+                .idUser(entity.getUser().getId())
+                .emailUser(entity.getUser().getEmail())
+                .idProject(entity.getProjects().getId())
+                .nameProject(entity.getProjects().getName())
+                .build();
+    }
 }

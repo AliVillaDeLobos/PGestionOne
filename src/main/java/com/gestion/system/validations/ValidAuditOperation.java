@@ -30,16 +30,19 @@ public class ValidAuditOperation implements ConstraintValidator<ValidAudit, Audi
                 case DELETE -> fail(context,
                         audit.getOldData() == null || audit.getNewData() != null,
                         "DELETE: OldData cannot be null and NewData should be null");
+                case RESTORE -> fail(context,
+                                audit.getOldData() == null || audit.getNewData() == null,
+                                "RESTORE: New Data ando Old Data cannot be null");
             };
 
     }
 
     private boolean fail(
             ConstraintValidatorContext context,
-            boolean condition,
+            boolean hasFailed,
             String message
     ) {
-        if (condition) {
+        if (hasFailed) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(message)
                     .addConstraintViolation();

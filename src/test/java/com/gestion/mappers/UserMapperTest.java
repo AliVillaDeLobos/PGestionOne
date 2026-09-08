@@ -126,7 +126,8 @@ public class UserMapperTest {
         }
     }
 
-    @Nested
+    /* Se descarto esta funcion por el momento
+     @Nested
     class ListRequestTest{
         @Test
         void listRequestHandleCorrectly(){
@@ -154,7 +155,7 @@ public class UserMapperTest {
             assertNotNull(resultList);
             assertTrue(resultList.isEmpty());
         }
-    }
+    }*/
 
 
 }

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class AuditResponse {
 
 
-    private Integer id;
+    private Long id;
     private String tableName;
     private Integer recordId;
     private Operation action;

@@ -4,7 +4,6 @@ import com.gestion.system.dto.audit.TaskAuditModel;
 import com.gestion.system.dto.request.create.TaskRequest;
 import com.gestion.system.dto.request.update.TaskUpdateRequest;
 import com.gestion.system.dto.response.TaskResponse;
-import com.gestion.system.exceptions.InvalidObjectModificationException;
 import com.gestion.system.exceptions.ResourceNotFoundException;
 import com.gestion.system.mappers.request.TaskMapper;
 import com.gestion.system.mappers.update.TaskUpdateMapper;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor

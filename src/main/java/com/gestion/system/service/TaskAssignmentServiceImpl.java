@@ -22,9 +22,9 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService{
     private final TaskAssignmentRepository taskAssignmentRepository;
     private final TaskAssignmentMapper taskAssignmentMapper;
     private final TaskAssignmentHistoryService historyService;
-    private final TaskUpdateMapper taskUpdateMapper;
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final UserService userService;
 
     private final UserAuthorizationService userAuthorization;
 
@@ -33,7 +33,8 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService{
     @Transactional
     public TaskAssignmentResponse assign(Integer idUser, TaskAssignmentRequest request) {
         User manager = userAuthorization.authorizeUser(idUser, SystemRole.MANAGER);
-        User member = userAuthorization.authorizeUser(request.getUserId(), SystemRole.MEMBER);
+//        User member = userAuthorization.authorizeUser(request.getUserId(), SystemRole.MEMBER);
+        User member = userService.findUser(request.getUserId());
         Tasks task = taskService.findTask(request.getTaskId());
 
         TaskAssignment taskAssignment = taskAssignmentMapper.requestToEntity(request, task, member);
