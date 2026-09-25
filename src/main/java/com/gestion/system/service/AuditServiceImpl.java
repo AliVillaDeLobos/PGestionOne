@@ -43,6 +43,7 @@ public class AuditServiceImpl implements AuditService {
     }
 
     @Override
+    @Transactional
     public void update(AuditableEntity table, Integer recordId, User actor, Object oldData, Object newData) {
         JsonNode json = objectMapper.valueToTree(oldData);
         JsonNode newJson = objectMapper.valueToTree(newData);
