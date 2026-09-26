@@ -44,7 +44,7 @@ public class AuditServiceImplTest {
     private UserAuthorizationService userAuthorization;
 
      @InjectMocks
-     private AuditServiceImpl auditService;
+    private AuditServiceImpl auditService;
 
 
     @Nested
