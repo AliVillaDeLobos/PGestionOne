@@ -31,5 +31,4 @@ public interface TaskAssignmentRepository extends JpaRepository<TaskAssignment,I
     List<TaskAssignment> findAllByTask(@Param("idTask") Integer idTask);
 
 
-    Integer id(Integer id);
 }

@@ -30,7 +30,7 @@ public interface TasksRepository extends JpaRepository<Tasks,Integer> {
                                @Param("today") LocalDate today);
 
     @Query("""
-        SELECT t FROM Tasks T
+        SELECT t FROM Tasks t
         WHERE t.projects.id = :projectId
         AND t.startDate <= :end
         AND t.endDate >= :start
@@ -39,5 +39,4 @@ public interface TasksRepository extends JpaRepository<Tasks,Integer> {
                                  @Param("start") LocalDate startDate,
                                  @Param("end") LocalDate endDate);
 
-    Integer id(Integer id);
 }
