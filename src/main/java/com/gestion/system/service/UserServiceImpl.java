@@ -4,6 +4,7 @@ import com.gestion.system.dto.request.create.UserRequest;
 import com.gestion.system.dto.request.update.ChangePasswordRequest;
 import com.gestion.system.dto.request.update.UserUpdateRequest;
 import com.gestion.system.dto.response.UserResponse;
+import com.gestion.system.exceptions.BusinessRulesExceptions.DuplicateResourceException;
 import com.gestion.system.exceptions.PasswordInvalidateException;
 import com.gestion.system.exceptions.ResourceNotFoundException;
 import com.gestion.system.mappers.request.UserMapper;
@@ -31,6 +32,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserResponse create(UserRequest userRequest, Integer createUserId, SystemRole role) {
         User userCreate = userAuthorization.authorizeUser(createUserId, SystemRole.ROOT);
+        if (usersRepository.existsByEmail(userRequest.getEmail())) {
+            throw new DuplicateResourceException("User already exist with email: " + userRequest.getEmail());
+        }
+
         User user = userMapper.requestToEntity(userRequest);
         user.setSystemRole(role);
         user = usersRepository.save(user);
