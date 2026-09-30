@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TaskAssigmentServiceImplTest {
+public class TaskAssignmentServiceImplTest {
      @Mock
     private TaskAssignmentRepository taskAssignmentRepository;
      @Mock
