@@ -4,6 +4,7 @@ import com.gestion.system.dto.response.DayResponse;
 import com.gestion.system.exceptions.ResourceNotFoundException;
 import com.gestion.system.mappers.response.DayMapper;
 import com.gestion.system.model.entities.Day;
+import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.DaysRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 public class DayServiceImpl implements DayService {
     private final DaysRepository daysRepository;
     private final DayMapper dayMapper;
+    private final UserAuthorizationService  userAuthorization;
 
     @Override
     @Transactional(readOnly = true)
