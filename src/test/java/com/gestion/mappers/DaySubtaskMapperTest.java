@@ -10,7 +10,7 @@ import com.gestion.system.mappers.request.SubtaskMapper;
 import com.gestion.system.mappers.response.DayMapper;
 import com.gestion.system.mappers.update.DaySubtaskUpdateMapper;
 import com.gestion.system.model.entities.Day;
-import com.gestion.system.model.entities.DaysSubtasks;
+import com.gestion.system.model.entities.DaySubtasks;
 import com.gestion.system.model.entities.Subtask;
 import com.gestion.system.model.enums.Status;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,7 @@ public class DaySubtaskMapperTest {
             when(dayMapper.toResponse(day)).thenReturn(dayResponse);
             when(subtaskMapper.toResponse(subtask)).thenReturn(subtaskResponse);
 
-            DaysSubtasks entity = DaysSubtasks.builder()
+            DaySubtasks entity = DaySubtasks.builder()
                     .subtask(subtask)
                     .day(day)
                     .status(Status.CANCELLED)
@@ -91,7 +91,7 @@ public class DaySubtaskMapperTest {
             Subtask subtask = Subtask.builder().id(7).build();
             DaySubtaskRequest request = new DaySubtaskRequest();
 
-            DaysSubtasks entity = mapper.requestToEntity(request, day, subtask);
+            DaySubtasks entity = mapper.requestToEntity(request, day, subtask);
 
             assertNotNull(entity);
             assertEquals(4, entity.getDay().getId());
@@ -103,7 +103,7 @@ public class DaySubtaskMapperTest {
     class ResponseListTest{
         @Test
         void  shouldReturnEmptyListWhenResponseListIsNull(){
-            DaysSubtasks response = new DaysSubtasks();
+            DaySubtasks response = new DaySubtasks();
             List<DaySubtaskResponse> list = mapper.listResponse(List.of(response));
 
             assertTrue(mapper.listResponse(null).isEmpty());
@@ -118,7 +118,7 @@ public class DaySubtaskMapperTest {
             DaySubtaskUpdateRequest request = new DaySubtaskUpdateRequest();
             request.setStatus(Status.COMPLETED);
 
-            DaysSubtasks entity = new DaysSubtasks();
+            DaySubtasks entity = new DaySubtasks();
             entity.setId(15);
             entity.setStatus(Status.PENDING);
 

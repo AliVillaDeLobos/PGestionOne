@@ -5,7 +5,7 @@ import com.gestion.system.dto.request.update.ProjectUpdateRequest;
 import com.gestion.system.dto.response.ProjectResponse;
 import com.gestion.system.mappers.request.ProjectMapper;
 import com.gestion.system.mappers.update.ProjectUpdateMapper;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import org.modelmapper.ModelMapper;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProjectMapperTest {
+public class ProjectsMapperTest {
     private ModelMapper modelMapper;
     private ProjectMapper mapper;
     private ProjectUpdateMapper updateMapper;
@@ -31,12 +31,12 @@ public class ProjectMapperTest {
         @Test
         void shouldMapToResponseCorrectly() {
 
-            Project project = Project.builder().id(10).name("Plants ecommerce").build();
-            ProjectResponse response = mapper.toResponse(project);
+            Projects projects = Projects.builder().id(10).name("Plants ecommerce").build();
+            ProjectResponse response = mapper.toResponse(projects);
 
             assertNotNull(response);
             assertEquals("Plants ecommerce", response.getName());
-            assertEquals(project.getId(), response.getId());
+            assertEquals(projects.getId(), response.getId());
         }
     }
 
@@ -53,7 +53,7 @@ public class ProjectMapperTest {
     class UpdateMapper{
         @Test
         void shouldNotUpdateId(){
-            Project entity = new Project();
+            Projects entity = new Projects();
                 entity.setId(25);
                 entity.setName("Old");
 

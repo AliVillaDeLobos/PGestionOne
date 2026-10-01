@@ -6,7 +6,7 @@ import com.gestion.system.dto.response.TaskResponse;
 import com.gestion.system.mappers.request.ProjectMapper;
 import com.gestion.system.mappers.request.TaskMapper;
 import com.gestion.system.mappers.update.TaskUpdateMapper;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.Tasks;
 import com.gestion.system.model.enums.Colors;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,8 +36,8 @@ public class TaskMapperTest {
     class ResponseTest{
         @Test
         void shouldMapProjectAndFieldsCorrectly() {
-            Project project = Project.builder().id(4).name("ecommerce").build();
-            Tasks task = Tasks.builder().id(10).project(project).build();
+            Projects projects = Projects.builder().id(4).name("ecommerce").build();
+            Tasks task = Tasks.builder().id(10).projects(projects).build();
 
             TaskResponse response = mapper.toResponse(task);
 
@@ -50,12 +50,12 @@ public class TaskMapperTest {
     class RequestTest{
         @Test
         void shouldMapProjectEntityCorrectly() {
-            Project project = Project.builder().id(4).name("ecommerce").build();
+            Projects projects = Projects.builder().id(4).name("ecommerce").build();
             TaskRequest request = TaskRequest.builder().color(Colors.BLACK).build();
 
-            Tasks result = mapper.requestToEntity(request, project);
+            Tasks result = mapper.requestToEntity(request, projects);
 
-            assertEquals(4, result.getProject().getId());
+            assertEquals(4, result.getProjects().getId());
             assertEquals(Colors.BLACK, result.getColor());
         }
         @Test
@@ -71,14 +71,14 @@ public class TaskMapperTest {
     class UpdateTest{
         @Test
         void shouldNotUpdateId(){
-            Project project = Project.builder().id(4).name("ecommerce").build();
-            Tasks entity = Tasks.builder().id(7).color(Colors.BLACK).project(project).build();
+            Projects projects = Projects.builder().id(4).name("ecommerce").build();
+            Tasks entity = Tasks.builder().id(7).color(Colors.BLACK).projects(projects).build();
             TaskUpdateRequest update = TaskUpdateRequest.builder().color(Colors.BLUE).build();
 
             Tasks result = updateMapper.updateEntity(update, entity);
 
             assertEquals(7, result.getId());
-            assertEquals(4, result.getProject().getId());
+            assertEquals(4, result.getProjects().getId());
             assertEquals(Colors.BLUE, result.getColor());
         }
     }
@@ -88,7 +88,7 @@ public class TaskMapperTest {
         @Test
         void shouldHandleNullReturningEmptyList(){
             assertNotNull(mapper.listResponse(null));
-            assertNotNull(mapper.listEntity(null, new Project()));
+            assertNotNull(mapper.listEntity(null, new Projects()));
         }
 
         @Test

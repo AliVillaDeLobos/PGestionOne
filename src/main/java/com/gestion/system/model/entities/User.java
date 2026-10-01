@@ -1,5 +1,6 @@
 package com.gestion.system.model.entities;
 
+import com.gestion.system.model.enums.SystemRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,4 +33,6 @@ public class User {
      @Column(name = "email", nullable = false)
     private String email;
 
+     @Column(name = "id_system_role", nullable = false)
+    private SystemRole systemRole;
 }

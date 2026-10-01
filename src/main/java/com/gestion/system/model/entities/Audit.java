@@ -24,7 +24,7 @@ public class Audit {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name = "id_audit")
-    private Integer id;
+    private Long id;
 
      @Column(name = "table_name", nullable = false)
     private String tableName;

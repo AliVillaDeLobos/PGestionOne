@@ -1,6 +1,7 @@
 package com.gestion.system.mappers.update;
 
 import com.gestion.system.config.GlobalMapperConfig;
+import com.gestion.system.dto.audit.DayHoursAuditModel;
 import com.gestion.system.dto.request.update.DaysHoursUpdateRequest;
 import com.gestion.system.model.entities.DaysHours;
 import org.mapstruct.Mapper;
@@ -12,4 +13,7 @@ public interface DaysHoursUpdateMapper {
 
      @Mapping(target = "id", ignore = true)
     DaysHours updateEntity(DaysHoursUpdateRequest dto, @MappingTarget DaysHours entity);
+
+     @Mapping(source = "daySubtask.id", target = "idDaySubtask")
+    DayHoursAuditModel toAudit(DaysHours entity);
 }

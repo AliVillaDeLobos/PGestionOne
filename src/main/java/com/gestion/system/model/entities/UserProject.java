@@ -23,6 +23,6 @@ public class UserProject {
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_project", nullable = false)
-    private Project project;
+    private Projects projects;
 
 }

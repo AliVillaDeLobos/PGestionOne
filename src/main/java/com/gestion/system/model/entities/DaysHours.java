@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class DaysHours {
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_day_subtask")
-    private DaysSubtasks daySubtask;
+    private DaySubtasks daySubtask;
 
      @Column(name = "start_time",nullable = false)
     private LocalDateTime startTime;

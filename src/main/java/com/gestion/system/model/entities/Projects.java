@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @Setter
-@Table(name = "project")
-public class Project {
+@Table(name = "projects")
+public class Projects {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class Project {
      @Column(name = "name", nullable = false)
     private String name;
 
-     @Column(name = "description", nullable = false)
+     @Column(name = "description")
     private String description;
 
-     @Column(name = "start_date", nullable = false) //Fecha de inicio del proyecto
+     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
 }

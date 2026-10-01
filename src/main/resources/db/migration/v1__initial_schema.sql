@@ -31,7 +31,7 @@ CREATE TABLE roles (
                        role_name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE project (
+CREATE TABLE projects (
                          id_project INT AUTO_INCREMENT PRIMARY KEY,
                          name VARCHAR(100) NOT NULL,
                          description TEXT,
@@ -55,7 +55,7 @@ CREATE TABLE tasks (
                        status VARCHAR(50) DEFAULT 'PENDING',
                        start_date DATE NOT NULL,
                        end_date DATE NOT NULL,
-                       FOREIGN KEY (id_project) REFERENCES project(id_project),
+                       FOREIGN KEY (id_project) REFERENCES projects(id_project),
                        UNIQUE KEY color_project(id_project, color),
                        UNIQUE KEY uq_project_name(id_project, name)
 );
@@ -144,7 +144,7 @@ CREATE TABLE user_project (
                               id_user INT NOT NULL,
                               id_project INT NOT NULL,
                               FOREIGN KEY (id_user) REFERENCES users(id_user),
-                              FOREIGN KEY (id_project) REFERENCES project(id_project),
+                              FOREIGN KEY (id_project) REFERENCES projects(id_project),
                               UNIQUE KEY uq_user_project (id_user, id_project)
 );
 

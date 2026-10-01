@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class Tasks {
 
      @ManyToOne(fetch = FetchType.LAZY)
      @JoinColumn(name = "id_project", nullable = false)
-    private Project project;
+    private Projects projects;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "color", nullable = false)

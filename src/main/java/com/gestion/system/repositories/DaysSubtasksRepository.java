@@ -1,7 +1,12 @@
 package com.gestion.system.repositories;
 
-import com.gestion.system.model.entities.DaysSubtasks;
+import com.gestion.system.model.entities.DaySubtasks;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DaysSubtasksRepository extends JpaRepository<DaysSubtasks,Integer> {
+import java.util.List;
+
+public interface DaysSubtasksRepository extends JpaRepository<DaySubtasks,Integer> {
+
+    List<DaySubtasks> findAllBySubtask_Id(Integer subtaskId);
+    List<DaySubtasks> findAllByDay_Id(Integer dayId);
 }

@@ -3,8 +3,8 @@ package com.gestion.system.mappers.request;
 
 import com.gestion.system.dto.request.create.DaysHoursRequest;
 import com.gestion.system.dto.response.DaysHoursResponse;
+import com.gestion.system.model.entities.DaySubtasks;
 import com.gestion.system.model.entities.DaysHours;
-import com.gestion.system.model.entities.DaysSubtasks;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +27,10 @@ public class DaysHoursMapper {
         return dto;
     }
 
-    public DaysHours requestToEntity(DaysHoursRequest request, DaysSubtasks daysSubtasks ) {
-        if (request == null || daysSubtasks == null) {return null;}
+    public DaysHours requestToEntity(DaysHoursRequest request, DaySubtasks daySubtasks) {
+        if (request == null || daySubtasks == null) {return null;}
         DaysHours daysHours = mapper.map(request,DaysHours.class);
-        daysHours.setDaySubtask(daysSubtasks);
+        daysHours.setDaySubtask(daySubtasks);
         return daysHours;
     }
 
@@ -39,9 +39,9 @@ public class DaysHoursMapper {
                 : daysHoursList.stream().map(this::toResponse).toList();
     }
 
-    public List<DaysHours> listEntity (List<DaysHoursRequest> listRequest, DaysSubtasks daysSubtasks) {
+    public List<DaysHours> listEntity (List<DaysHoursRequest> listRequest, DaySubtasks daySubtasks) {
         return listRequest == null || listRequest.isEmpty() ? List.of() :
-                listRequest.stream().map(request -> requestToEntity(request, daysSubtasks))
+                listRequest.stream().map(request -> requestToEntity(request, daySubtasks))
                         .toList();
     }
 }

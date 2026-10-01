@@ -2,7 +2,7 @@ package com.gestion.system.mappers.request;
 
 import com.gestion.system.dto.request.create.TaskRequest;
 import com.gestion.system.dto.response.TaskResponse;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.Tasks;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -22,16 +22,16 @@ public class TaskMapper {
     public TaskResponse toResponse(Tasks task) {
         if (task == null) return null;
         TaskResponse dto = mapper.map(task, TaskResponse.class);
-        dto.setProject(projectMapper.toResponse(task.getProject()));
+        dto.setProject(projectMapper.toResponse(task.getProjects()));
         return dto;
     }
 
-    public Tasks requestToEntity(TaskRequest taskRequest, Project project
+    public Tasks requestToEntity(TaskRequest taskRequest, Projects projects
     ) {
-        if (project == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
+        if (projects == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
         if (taskRequest == null) return null;
         Tasks entity = mapper.map(taskRequest, Tasks.class);
-        entity.setProject(project);
+        entity.setProjects(projects);
         return entity;
     }
 
@@ -40,10 +40,10 @@ public class TaskMapper {
                 : tasks.stream().map(this::toResponse).toList();
     }
 
-    public List<Tasks> listEntity(List<TaskRequest> tasksResponse, Project project){
-        if (project == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
+    public List<Tasks> listEntity(List<TaskRequest> tasksResponse, Projects projects){
+        if (projects == null ) throw new IllegalArgumentException("Error inyectando el proyecto a 'Tasks'");
         return tasksResponse == null || tasksResponse.isEmpty() ? List.of()
                 : tasksResponse.stream().map(
-                        task -> this.requestToEntity(task, project)).toList();
+                        task -> this.requestToEntity(task, projects)).toList();
     }
 }

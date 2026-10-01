@@ -2,7 +2,7 @@ package com.gestion.system.mappers.request;
 
 import com.gestion.system.dto.request.create.ProjectRequest;
 import com.gestion.system.dto.response.ProjectResponse;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -16,21 +16,22 @@ public class ProjectMapper {
         this.mapper = mapper;
     }
 
-    public ProjectResponse toResponse(Project project) {
-        return project == null ? null : mapper.map(project, ProjectResponse.class);
+    public ProjectResponse toResponse(Projects projects) {
+        return projects == null ? null : mapper.map(projects, ProjectResponse.class);
     }
 
-    public Project requestToEntity(ProjectRequest dto) {
-        return dto == null ? null : mapper.map(dto, Project.class);
+    public Projects requestToEntity(ProjectRequest dto) {
+        return dto == null ? null : mapper.map(dto, Projects.class);
     }
 
-    public List<ProjectResponse> listResponse (List<Project> projects) {
+    public List<ProjectResponse> listResponse (List<Projects> projects) {
         return projects == null || projects.isEmpty() ?  List.of()
                 : projects.stream().map(this::toResponse).toList();
     }
 
-    public List<Project> listEntity(List<ProjectRequest> dtos) {
+    public List<Projects> listEntity(List<ProjectRequest> dtos) {
         return dtos == null || dtos.isEmpty() ? List.of()
                 : dtos.stream().map(this::requestToEntity).toList();
     }
+
 }

@@ -1,8 +1,8 @@
 package com.gestion.system.mappers.request;
 
-import com.gestion.system.dto.request.create.UserProjectRequest;
+import com.gestion.system.dto.audit.UserProjectAuditModel;
 import com.gestion.system.dto.response.UserProjectResponse;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.User;
 import com.gestion.system.model.entities.UserProject;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class UserProjectMapper {
                 : UserProjectResponse.builder()
                 .id(entity.getId())
                 .user(userMapper.toResponse(entity.getUser()))
-                .project(projectMapper.toResponse(entity.getProject()))
+                .project(projectMapper.toResponse(entity.getProjects()))
                 .build();
     }
 
@@ -33,12 +33,23 @@ public class UserProjectMapper {
                 : entity.stream().map(this::toResponse).toList();
     }
 
-    public UserProject requestToEntity(User user, Project project) {
-        if (user == null || project == null) throw new IllegalArgumentException("User and Project requests can't be null");
+    public UserProject requestToEntity(User user, Projects projects) {
+        if (user == null || projects == null)
+            throw new IllegalArgumentException("User and Project requests can't be null");
         return UserProject.builder()
                 .user(user)
-                .project(project)
+                .projects(projects)
                 .build();
     }
 
+    public UserProjectAuditModel toAudit(UserProject entity) {
+        if (entity == null)
+            throw new IllegalArgumentException("UserProject can't be null");
+        return UserProjectAuditModel.builder()
+                .idUser(entity.getUser().getId())
+                .emailUser(entity.getUser().getEmail())
+                .idProject(entity.getProjects().getId())
+                .nameProject(entity.getProjects().getName())
+                .build();
+    }
 }

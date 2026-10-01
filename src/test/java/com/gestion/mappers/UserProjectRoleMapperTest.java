@@ -35,8 +35,8 @@ public class UserProjectRoleMapperTest {
         @Test
         void shouldMapFieldsAndEntitiesToResponse() {
             User user = User.builder().name("Juan").build();
-            Project project = Project.builder().name("Android App").build();
-            UserProject userProject = UserProject.builder().id(1).user(user).project(project).build();
+            Projects projects = Projects.builder().name("Android App").build();
+            UserProject userProject = UserProject.builder().id(1).user(user).projects(projects).build();
             Roles role = Roles.builder().roleName("Project Manager").build();
             UserProjectRole  entity = UserProjectRole.builder()
                     .id(10).userProject(userProject).role(role).build();
@@ -55,15 +55,15 @@ public class UserProjectRoleMapperTest {
         @Test
         void shouldMapFieldsAndEntitiesToRequest() {
             User user = User.builder().name("Juan").build();
-            Project project = Project.builder().name("Android App").build();
-            UserProject userProject = UserProject.builder().id(1).user(user).project(project).build();
+            Projects projects = Projects.builder().name("Android App").build();
+            UserProject userProject = UserProject.builder().id(1).user(user).projects(projects).build();
             Roles role = Roles.builder().roleName("Project Manager").build();
 
             UserProjectRole result = mapper.requestToEntity(userProject, role);
 
             assertEquals(1, result.getUserProject().getId());
             assertEquals("Juan", result.getUserProject().getUser().getName());
-            assertEquals("Android App", result.getUserProject().getProject().getName());
+            assertEquals("Android App", result.getUserProject().getProjects().getName());
             assertEquals("Project Manager", result.getRole().getRoleName());
         }
 
@@ -89,8 +89,8 @@ public class UserProjectRoleMapperTest {
         @Test
         void shouldUpdateOnlyRole(){
             User user = User.builder().id(3).build();
-            Project project = Project.builder().id(90).build();
-            UserProject userProject = UserProject.builder().id(15).user(user).project(project).build();
+            Projects projects = Projects.builder().id(90).build();
+            UserProject userProject = UserProject.builder().id(15).user(user).projects(projects).build();
             Roles role = Roles.builder().roleName("Project Manager").build();
 
             UserProjectRole entity = UserProjectRole.builder()
@@ -103,7 +103,7 @@ public class UserProjectRoleMapperTest {
             assertEquals(20, result.getId());
             assertEquals("Developer", result.getRole().getRoleName());
             assertEquals(3, result.getUserProject().getUser().getId());
-            assertEquals(90, result.getUserProject().getProject().getId());
+            assertEquals(90, result.getUserProject().getProjects().getId());
             assertEquals(15, result.getUserProject().getId());
         }
 

@@ -8,14 +8,15 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class AuditResponse {
 
 
-    private Integer id;
+    private Long id;
     private String tableName;
     private Integer recordId;
     private Operation action;

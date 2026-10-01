@@ -5,7 +5,7 @@ import com.gestion.system.mappers.request.ProjectMapper;
 import com.gestion.system.mappers.request.TaskMapper;
 import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.mappers.response.TaskAssignmentHistoryMapper;
-import com.gestion.system.model.entities.Project;
+import com.gestion.system.model.entities.Projects;
 import com.gestion.system.model.entities.TaskAssignmentHistory;
 import com.gestion.system.model.entities.Tasks;
 import com.gestion.system.model.entities.User;
@@ -35,8 +35,8 @@ public class TaskAssignmentHistoryMapperTest {
         void shouldMapExternalEntitiesToResponse(){
             User userOne = User.builder().name("Pedro").build();
             User userTwo = User.builder().name("Martin").build();
-            Project project = Project.builder().id(50).build();
-            Tasks task = Tasks.builder().id(3).project(project).build();
+            Projects projects = Projects.builder().id(50).build();
+            Tasks task = Tasks.builder().id(3).projects(projects).build();
 
             TaskAssignmentHistory entity = TaskAssignmentHistory.builder()
                     .id(200).userAssigned(userOne).userAssignedBy(userTwo).task(task).build();

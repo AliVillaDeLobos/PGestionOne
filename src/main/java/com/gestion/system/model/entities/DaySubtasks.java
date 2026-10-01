@@ -10,8 +10,8 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@Table( name = "days_subtasks")
-public class DaysSubtasks {
+@Table( name = "day_subtasks")
+public class DaySubtasks {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)

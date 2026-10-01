@@ -10,7 +10,7 @@ import com.gestion.system.mappers.request.UserMapper;
 import com.gestion.system.model.entities.TaskAssignment;
 import com.gestion.system.model.entities.Tasks;
 import com.gestion.system.model.entities.User;
-import com.gestion.system.model.enums.Role;
+import com.gestion.system.model.enums.ProjectRoles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -64,14 +64,14 @@ public class TaskAssignmentMapperTest {
             User user =  User.builder().id(5).name("UsrOne").build();
 
             TaskAssignmentRequest request = new TaskAssignmentRequest();
-            request.setRole(Role.SUPPORT);
+            request.setProjectRoles(ProjectRoles.SUPPORT);
 
             TaskAssignment result = mapper.requestToEntity(request, tasks, user);
 
             assertNotNull(result);
             assertEquals("task 1", result.getTask().getName());
             assertEquals(5, result.getUser().getId());
-            assertEquals(Role.SUPPORT, result.getRole());
+            assertEquals(ProjectRoles.SUPPORT, result.getProjectRoles());
         }
 
         @Test
@@ -104,14 +104,14 @@ public class TaskAssignmentMapperTest {
             Tasks tasks = Tasks.builder().id(3).name("task 1").build();
             User user =  User.builder().id(5).name("UsrOne").build();
             TaskAssignment entity = TaskAssignment.builder()
-                    .id(20).role(Role.REVIEWER).task(tasks).user(user).build();
+                    .id(20).projectRoles(ProjectRoles.REVIEWER).task(tasks).user(user).build();
 
             TaskAssignmentUpdateRequest updateRequest = new TaskAssignmentUpdateRequest();
-            updateRequest.setRole(Role.SUPPORT);
+            updateRequest.setProjectRoles(ProjectRoles.SUPPORT);
 
             TaskAssignment result = mapper.updateEntity(updateRequest, entity);
 
-            assertEquals(Role.SUPPORT, result.getRole());
+            assertEquals(ProjectRoles.SUPPORT, result.getProjectRoles());
             assertEquals(20, result.getId());
             assertEquals("UsrOne", result.getUser().getName());
             assertEquals(3, result.getTask().getId());
