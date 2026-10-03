@@ -9,12 +9,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   #      ddl-auto: validate #SOLO SE USA CON FLYWAY ACTIVO
+  #      ddl-auto: update #SOLO SI NO SE ESTA USANDO FLYWAY
   flyway:
-    enabled: false
-#    url: jdbc:mariadb://localhost:3310/pgestion_one
-#    user: ${DB_USER}
-#    password: ${DB_PASS}
-#    baseline-on-migrate: true
-#    locations: classpath:db/migration
+    enabled: true
+    community-db-support-enabled: true # Se agrego por las versiones diferentes de Flyway y mariadb
+    baseline-on-migrate: false #Solo se habilita por una vez para cuando se hace el esquema inicial, despues se quita
+    baseline-version: 2
+    locations: classpath:db/migration
