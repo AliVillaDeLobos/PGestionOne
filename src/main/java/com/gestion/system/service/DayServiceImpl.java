@@ -7,13 +7,14 @@ import com.gestion.system.model.entities.Day;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.DaysRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DayServiceImpl implements DayService {
     private final DaysRepository daysRepository;
     private final DayMapper dayMapper;

@@ -11,13 +11,14 @@ import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.TaskAssignmentRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskAssignmentServiceImpl implements TaskAssignmentService{
     private final TaskAssignmentRepository taskAssignmentRepository;
     private final TaskAssignmentMapper taskAssignmentMapper;

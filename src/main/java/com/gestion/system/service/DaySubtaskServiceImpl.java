@@ -15,13 +15,14 @@ import com.gestion.system.model.enums.AuditableEntity;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.DaysSubtasksRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DaySubtaskServiceImpl implements DaySubtaskService {
     private final DaysSubtasksRepository  daysSubtasksRepository;
     private final DaySubtaskMapper daySubtaskMapper;

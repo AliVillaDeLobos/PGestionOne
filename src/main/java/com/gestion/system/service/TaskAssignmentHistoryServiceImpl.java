@@ -9,13 +9,14 @@ import com.gestion.system.model.enums.Action;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.TaskAssignmentHistoryRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskAssignmentHistoryServiceImpl implements TaskAssignmentHistoryService {
     private final TaskAssignmentHistoryRepository historyRepository;
     private final TaskAssignmentHistoryMapper historyMapper;

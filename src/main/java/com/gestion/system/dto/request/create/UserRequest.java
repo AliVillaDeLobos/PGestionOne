@@ -14,25 +14,23 @@ import lombok.*;
 @AllArgsConstructor
 public class UserRequest {
 
-
-
-     @NotBlank(message = "El nombre del usuario es obligatorio.")
-     @Pattern(regexp = ValidationPatterns.NAME_REGEX, message = "Solo se permiten letras.")
+     @NotBlank(message = "Name is required.")
+     @Pattern(regexp = ValidationPatterns.NAME_REGEX, message = "The name only content letters.")
      @Size(min = 2, max = 25, message = "Min 2 and max 25 letters.")
     private String name;
 
-     @NotBlank(message = "El primer apellido del usuario es obligarotio.")
+     @NotBlank(message = "Last name cannot be null.")
      @Pattern(regexp = ValidationPatterns.NAME_REGEX, message = "Solo se permiten letras.")
      @Size(min = 2, max = 25, message = "Min 2 and max 25 letters.")
     private String firstLastName;
 
-     @NotBlank(message = "El segundo apellido del usuario es obligatorio.")
+     @NotBlank(message = "Second last name cannot be null.")
      @Pattern(regexp = ValidationPatterns.NAME_REGEX, message = "Solo se permiten letras.")
      @Size(min = 2, max = 25, message = "Min 2 and max 25 letters.")
     private String secondLastName;
 
-     @NotBlank(message = "El email del usuario es obligatorio.")
-     @Email(message = "El email no es valido.")
+     @NotBlank(message = "User email cannot be null.")
+     @Email(message = "The mail is not valid.")
      @Size(max = 50, message = "Max 50 characters.")
     private String email;
 

@@ -11,6 +11,7 @@ import com.gestion.system.model.enums.Operation;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.AuditRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuditServiceImpl implements AuditService {
     private final AuditRepository auditRepository;
     private final ObjectMapper objectMapper;

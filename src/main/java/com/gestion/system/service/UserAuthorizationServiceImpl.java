@@ -7,11 +7,12 @@ import com.gestion.system.model.entities.User;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.UsersRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserAuthorizationServiceImpl implements UserAuthorizationService {
     private final UsersRepository usersRepository;
 
@@ -30,7 +31,7 @@ public class UserAuthorizationServiceImpl implements UserAuthorizationService {
         return user;
     }
 
-      @Override
+    @Override
     public void validateDeleteUserPermission(User targetUser, User actingUser) {
         Integer targetRole = targetUser.getSystemRole().getAuthorityLevel();
         Integer requesterRole = actingUser.getSystemRole().getAuthorityLevel();
@@ -41,4 +42,9 @@ public class UserAuthorizationServiceImpl implements UserAuthorizationService {
         }
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return usersRepository.findByEmail(email).orElseThrow(
+                () -> new ResourceNotFoundException("User not found with email: " + email));
+    }
 }

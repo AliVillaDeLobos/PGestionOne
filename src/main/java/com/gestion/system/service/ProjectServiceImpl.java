@@ -13,13 +13,14 @@ import com.gestion.system.model.enums.AuditableEntity;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.ProjectRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;

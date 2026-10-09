@@ -5,13 +5,14 @@ import com.gestion.system.model.entities.Subtask;
 import com.gestion.system.model.entities.SubtaskDeletedHistory;
 import com.gestion.system.repositories.SubtaskDeletedHistoryRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SubtaskDeletedHistoryServiceImpl implements SubtaskDeletedHistoryService {
     private final SubtaskDeletedHistoryRepository deletedHistoryRepository;
 

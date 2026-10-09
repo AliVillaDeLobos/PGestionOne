@@ -16,6 +16,7 @@ import com.gestion.system.model.enums.Status;
 import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.TasksRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
     private final TasksRepository tasksRepository;
     private final TaskMapper taskMapper;

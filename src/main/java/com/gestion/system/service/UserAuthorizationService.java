@@ -8,5 +8,6 @@ public interface UserAuthorizationService {
     void validateDeleteUserPermission(User target, User requester);
     void authorize(User requester, SystemRole requiredRole);
     User authorizeUser(Integer userId, SystemRole requiredRole);
+    User findUserByEmail(String email);
 
 }
