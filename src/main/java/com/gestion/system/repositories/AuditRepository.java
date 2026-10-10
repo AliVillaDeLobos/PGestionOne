@@ -12,7 +12,7 @@ public interface AuditRepository extends JpaRepository<Audit,Integer> {
 
     List<Audit> findAllByOperationAndCreatedDateBetween(Operation operation, LocalDateTime min, LocalDateTime max);
     List<Audit> findAllByUserCreated_Id(Integer idUserCreated);
-
+    List<Audit> findAllByUserCreated_EmailIgnoreCase(String email);
     List<Audit> findAllByTableNameIgnoreCase(String tableName);
     List<Audit> findAllByRecordId(Integer recordId);
 }

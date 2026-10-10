@@ -89,31 +89,29 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AuditResponse> getAllByUser(Integer idUser, Integer idActor) {
-        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
-
-        return auditMapper.listResponse(auditRepository.findAllByUserCreated_Id(idActor));
+    public List<AuditResponse> getAllByUser(Integer idUser, String email) {
+//        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN); Sustituido por PreAutorize hasta que se agreguen nuevas validaciones
+        return auditMapper.listResponse(auditRepository.findAllByUserCreated_EmailIgnoreCase(email));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<AuditResponse> getAllByTable(Integer idUser, AuditableEntity table) {
-        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
+//        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
         return auditMapper.listResponse(auditRepository.findAllByTableNameIgnoreCase(table.name()));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<AuditResponse> getAllByRecord(Integer idUser, Integer recordId) {
-        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
+//        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
         return auditMapper.listResponse(auditRepository.findAllByRecordId(recordId));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<AuditResponse> getAllOperationByDate(Integer idUser,Operation operation, LocalDate startDate, LocalDate endDate){
-        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
-
+//        userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
         return auditMapper.listResponse(auditRepository.findAllByOperationAndCreatedDateBetween(
                 operation,  startDate.atStartOfDay(), endDate.plusDays(1).atStartOfDay()));
     }

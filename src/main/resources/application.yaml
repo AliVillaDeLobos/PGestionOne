@@ -18,3 +18,7 @@ spring:
     baseline-on-migrate: false #Solo se habilita por una vez para cuando se hace el esquema inicial, despues se quita
     baseline-version: 2
     locations: classpath:db/migration
+
+server:
+  servlet:
+    context-path: /pgestion_one

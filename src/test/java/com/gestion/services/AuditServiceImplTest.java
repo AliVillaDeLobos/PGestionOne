@@ -168,17 +168,17 @@ public class AuditServiceImplTest {
         @DisplayName("getAllByUser: should return mapped AuditResponse list when user has ADMIN role.")
         void getAllByUser_Authorization_ReturnAuditList() {
             Integer idUser = 10;
-            Integer idActor = 17;
+            String email = "tes@mail.com";
 
             Audit auditEntity = new Audit();
             List<Audit> auditList = List.of(auditEntity);
             AuditResponse dto = new  AuditResponse();
             List<AuditResponse> dtoResponseList = List.of(dto);
 
-            when(auditRepository.findAllByUserCreated_Id(idActor)).thenReturn(auditList);
+            when(auditRepository.findAllByUserCreated_EmailIgnoreCase(email)).thenReturn(auditList);
             when(auditMapper.listResponse(auditList)).thenReturn(dtoResponseList);
 
-            List<AuditResponse> actualResponse = auditService.getAllByUser(idUser, idActor);
+            List<AuditResponse> actualResponse = auditService.getAllByUser(idUser, email);
 
             assertNotNull(actualResponse);
             assertEquals(1, actualResponse.size());
@@ -192,15 +192,15 @@ public class AuditServiceImplTest {
         @DisplayName("getAllByUser: should throw UnauthorizedOperationException when user lacks ADMIN role")
         void getAllByUser_Unauthorized_ThrowsException() {
             Integer idUser = 10;
-            Integer idActor = 5;
+            String email = "tes@mail.com";
 
             doThrow(new UnauthorizedOperationException("Unauthorized"))
                     .when(userAuthorization).authorizeUser(idUser, SystemRole.ADMIN);
 
             assertThrows(UnauthorizedOperationException.class,
-                    () -> { auditService.getAllByUser(idUser, idActor); });
+                    () -> { auditService.getAllByUser(idUser, email); });
 
-            verify(auditRepository, never()).findAllByUserCreated_Id(any());
+            verify(auditRepository, never()).findAllByUserCreated_EmailIgnoreCase(any());
             verify(auditMapper, never()).listResponse(any());
         }
 
@@ -208,15 +208,15 @@ public class AuditServiceImplTest {
         @DisplayName("getAllByUser: should throw ResourceNotFoundException when ID does not exist")
         void getAllByUser_UserNotFound_ThrowsException() {
             Integer idUser = 99;
-            Integer idActor = 5;
+            String email = "tes@mail.com";
 
             doThrow(new ResourceNotFoundException("User not found"))
                     .when(userAuthorization).authorizeUser(idUser, SystemRole.ADMIN);
 
             assertThrows(ResourceNotFoundException.class,
-                    () -> {auditService.getAllByUser(idUser, idActor);});
+                    () -> {auditService.getAllByUser(idUser, email);});
 
-            verify(auditRepository, never()).findAllByUserCreated_Id(any());
+            verify(auditRepository, never()).findAllByUserCreated_EmailIgnoreCase(any());
             verify(auditMapper, never()).listResponse(any());
         }
 
