@@ -37,12 +37,12 @@ public class GlobalExceptionHandler  {
     public ResponseEntity<ErrorDetails> handlerMessageNotReadable(
             HttpMessageNotReadableException ex
     ){
-        return json(HttpStatus.BAD_REQUEST, "Invalid JSON format.");
+        return json(HttpStatus.BAD_REQUEST, "Invalid JSON format."  + ex.getMessage());
     }
 
     @ExceptionHandler(InvalidDeletionUserException.class)
     public ResponseEntity<ErrorDetails> handleInvalidDeletionUser(InvalidDeletionUserException ex) {
-        return json(HttpStatus.BAD_REQUEST, "User haven't enough permissions.");
+        return json(HttpStatus.BAD_REQUEST, "User haven't enough permissions." + ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -55,13 +55,13 @@ public class GlobalExceptionHandler  {
     // 401 No autorizado
     @ExceptionHandler(PasswordInvalidateException.class)
     public ResponseEntity<ErrorDetails> handlePasswordInvalid(PasswordInvalidateException ex) {
-        return json(HttpStatus.UNAUTHORIZED, "Unauthorize. Password Invalid.");
+        return json(HttpStatus.UNAUTHORIZED, "Unauthorize. Password Invalid." + ex.getMessage());
     }
 
     // 403 Prohibido/Forbidden
     @ExceptionHandler(UnauthorizedOperationException.class)
     public ResponseEntity<ErrorDetails> handleUnauthorizeOperation(UnauthorizedOperationException ex) {
-        return json(HttpStatus.FORBIDDEN, "Don't have enought permissions.");
+        return json(HttpStatus.FORBIDDEN, "Don't have enough permissions." + ex.getMessage());
     }
 
     //    404 Recurso no encontrado
@@ -75,27 +75,27 @@ public class GlobalExceptionHandler  {
     //    409  Violaciones de integridad (FK, unique, etc.)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorDetails> handleDataIntegrity(DataIntegrityViolationException ex) {
-        return json(HttpStatus.CONFLICT, "Data Integrity violation.");
+        return json(HttpStatus.CONFLICT, "Data Integrity violation." + ex.getMessage());
     }
 
     @ExceptionHandler(DuplicateAssignmentException.class)
     public ResponseEntity<ErrorDetails> handleDuplicateAssignment(DuplicateAssignmentException ex) {
-        return json(HttpStatus.CONFLICT, "Duplicate Assignment.");
+        return json(HttpStatus.CONFLICT, "Duplicate Assignment." + ex.getMessage());
     }
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ErrorDetails> handleDuplicateResource(DuplicateResourceException ex) {
-        return json(HttpStatus.CONFLICT, "Resource Duplicate.");
+        return json(HttpStatus.CONFLICT, "Resource Duplicate." + ex.getMessage());
     }
 
     @ExceptionHandler(InvalidResourceStateException.class)
     public ResponseEntity<ErrorDetails> handleInvalidResource(InvalidResourceStateException ex) {
-        return json(HttpStatus.CONFLICT, "Resource Invalid State.");
+        return json(HttpStatus.CONFLICT, "Resource Invalid State." + ex.getMessage());
     }
 
     //    500 Error generico
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handlerGeneric(Exception ex){
-        return json(HttpStatus.INTERNAL_SERVER_ERROR, "Server Internal Error ");
+        return json(HttpStatus.INTERNAL_SERVER_ERROR, "Server Internal Error " + ex.getMessage());
     }
 
     //    Errores de @Valid
