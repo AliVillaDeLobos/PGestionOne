@@ -21,4 +21,4 @@ spring:
 
 server:
   servlet:
-    context-path: /pgestion_one
+    context-path: /api/pgestion_one

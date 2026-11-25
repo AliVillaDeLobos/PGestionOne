@@ -101,7 +101,7 @@ public class SubtaskServiceImpl implements SubtaskService{
     @Override
     @Transactional
     public SubtaskResponse delete(Integer idUser, Integer idSubtask, String message, Integer idTask) {
-        User user = userAuthorization.authorizeUser(idUser, SystemRole.MANAGER);
+        User user = userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
         Subtask subtask = subtaskRepository.findByIdAndTask_Id(idSubtask, idTask).orElseThrow(
                 () -> new ResourceNotFoundException("Subtask not found in Task."));
 
