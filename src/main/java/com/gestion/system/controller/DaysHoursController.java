@@ -16,9 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/days-hours")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('MANGER','MEMBER','ADMIN','ROOT')")
+@PreAuthorize("hasAnyRole('MEMBER')")
 public class DaysHoursController {
-                            //Id = 1 del User es temporal hasta agregar SecurityContext
+//                            Id = 1 del User es temporal hasta agregar SecurityContext
                             private static final Integer TEMP_USER_ID = 1;
     private final DaysHoursService daysHoursService;
 
@@ -36,19 +36,22 @@ public class DaysHoursController {
     }
 
     @PostMapping("/subtask/{idSubtask}")
+    @PreAuthorize("hasAnyRole('MANAGER')")
     public ResponseEntity<DaysHoursResponse> create(@PathVariable Integer idSubtask, @Valid @RequestBody DaysHoursRequest requestDto) {
         DaysHoursResponse response = daysHoursService.create(requestDto, idSubtask, TEMP_USER_ID);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('MANAGER')")
     public ResponseEntity<DaysHoursResponse> update(@PathVariable Integer id, @Valid @RequestBody DaysHoursUpdateRequest requestUpdate) {
         DaysHoursResponse response = daysHoursService.update(id, requestUpdate, TEMP_USER_ID);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DaysHoursResponse> delete(@PathVariable Integer id) {
+    @PreAuthorize("hasAnyRole('MANAGER')")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         daysHoursService.delete(id, TEMP_USER_ID);
         return ResponseEntity.noContent().build();
     }

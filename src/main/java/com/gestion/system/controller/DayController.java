@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/days")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('MEMBER','MANAGER','ADMIN','ROOT')")
+@PreAuthorize("hasRole('MEMBER')")
 public class DayController {
     private final DayService dayService;
 

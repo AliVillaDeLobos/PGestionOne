@@ -73,7 +73,7 @@ public class DaySubtaskServiceImpl implements DaySubtaskService {
     @Override
     @Transactional
     public DaySubtaskResponse update(Integer idDaySubtask, DaySubtaskUpdateRequest updateRequest, Integer idUser) {
-        User user = userAuthorization.authorizeUser(idUser, SystemRole.MANAGER);
+        User user = userAuthorization.authorizeUser(idUser, SystemRole.MEMBER); //Lo cambie a MEMBER, estaba en MANAGER
         DaySubtasks daySubtasks = findDaySubtask(idDaySubtask);
         Day day =  dayService.findDay(updateRequest.getIdDay());
 

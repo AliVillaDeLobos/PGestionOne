@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/audits")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('ADMIN', 'ROOT')")
+@PreAuthorize("hasRole('ADMIN')")
 public class AuditController {
                                 //Id = 1 del User es temporal hasta agregar SecurityContext
                                 private static final Integer TEMP_USER_ID = 1;
