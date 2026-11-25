@@ -33,7 +33,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     public ProjectResponse getById(Integer idProject) {
         Projects project = findProject(idProject);
-
         return projectMapper.toResponse(project);
     }
 
