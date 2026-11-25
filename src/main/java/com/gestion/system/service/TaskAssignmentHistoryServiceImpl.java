@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TaskAssignmentHistoryServiceImpl implements TaskAssignmentHistoryService {
+ public class TaskAssignmentHistoryServiceImpl implements TaskAssignmentHistoryService {
     private final TaskAssignmentHistoryRepository historyRepository;
     private final TaskAssignmentHistoryMapper historyMapper;
     private final TaskService taskService;
