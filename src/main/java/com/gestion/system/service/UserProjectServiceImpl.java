@@ -49,7 +49,7 @@ public class UserProjectServiceImpl implements UserProjectService {
     @Override
     @Transactional
     public void delete(Integer idUser, Integer idUserProject) {
-        User user = userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
+        User user = userAuthorization.authorizeUser(idUser, SystemRole.ROOT);
         UserProject userProject = findUserProject(idUserProject);
 
         audit.delete(AuditableEntity.USER_PROJECT, userProject.getId(), user, userProjectMapper.toAudit(userProject));
@@ -67,6 +67,7 @@ public class UserProjectServiceImpl implements UserProjectService {
     @Transactional(readOnly = true)
     public List<UserProjectResponse> getAllProjectsByUser(Integer idUserRequester, Integer idUserRequest) {
         userAuthorization.authorizeUser(idUserRequester, SystemRole.ADMIN);
+        userService.findUser(idUserRequest);
         return userProjectMapper.listResponse(userProjectRepository.findAllByUser_Id(idUserRequest));
     }
 
@@ -74,6 +75,7 @@ public class UserProjectServiceImpl implements UserProjectService {
     @Transactional(readOnly = true)
     public List<UserProjectResponse> getAllUsersByProjects(Integer idUser, Integer idProject) {
         userAuthorization.authorizeUser(idUser, SystemRole.ADMIN);
+        projectService.findProject(idProject);
         return userProjectMapper.listResponse(userProjectRepository.findAllByProjects_Id(idProject));
     }
 
