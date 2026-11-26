@@ -1,6 +1,7 @@
 package com.gestion.system.service;
 
 import com.gestion.system.dto.request.create.TaskRequest;
+import com.gestion.system.dto.request.filters.TaskFilterRequest;
 import com.gestion.system.dto.request.update.TaskUpdateRequest;
 import com.gestion.system.dto.response.TaskResponse;
 import com.gestion.system.model.entities.Tasks;
@@ -12,10 +13,11 @@ import java.util.List;
 
 public interface TaskService {
 
-    List<TaskResponse> getByProjectId(Integer idProject);
-    List<TaskResponse> getByNameContaining(Integer idProject, String name);
-    List<TaskResponse> getByColor(Integer idProject, Colors color);
-    List<TaskResponse> getByStatus(Integer idProject, Status status);
+//    List<TaskResponse> getByProjectId(Integer idProject);
+//    List<TaskResponse> getByNameContaining(Integer idProject, String name);
+//    List<TaskResponse> getByColor(Integer idProject, Colors color);
+//    List<TaskResponse> getByStatus(Integer idProject, Status status);
+    List<TaskResponse> getByProjectId(Integer idProject, TaskFilterRequest filters);
     TaskResponse getById(Integer id);
     TaskResponse create(Integer idUser, TaskRequest taskRequest, Integer idProject);
     TaskResponse update(Integer idUser, TaskUpdateRequest update, Integer idProject, Integer idTask);

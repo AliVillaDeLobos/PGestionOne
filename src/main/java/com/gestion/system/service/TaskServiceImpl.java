@@ -2,6 +2,7 @@ package com.gestion.system.service;
 
 import com.gestion.system.dto.audit.TaskAuditModel;
 import com.gestion.system.dto.request.create.TaskRequest;
+import com.gestion.system.dto.request.filters.TaskFilterRequest;
 import com.gestion.system.dto.request.update.TaskUpdateRequest;
 import com.gestion.system.dto.response.TaskResponse;
 import com.gestion.system.exceptions.ResourceNotFoundException;
@@ -34,34 +35,74 @@ public class TaskServiceImpl implements TaskService {
 
     private final UserAuthorizationService userAuthorization;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<TaskResponse> getByProjectId(Integer idProject) {
-        return taskMapper.listResponse(
-                tasksRepository.findAllByProjects_Id(idProject));
-    }
+//      SE CREO EL OTRO METODO CON UN FILTRO PARA USAR EL DTO EN LUGAR DE ABRI VARIOS ENDPOINTS
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TaskResponse> getByProjectId(Integer idProject) {
+//        return taskMapper.listResponse(
+//                tasksRepository.findAllByProjects_Id(idProject));
+//    }
 //    Si los parametros de busqueda crecen en lugar de hacer mas metodos, mejor mover a un DTO que filtre
-    @Override
-    @Transactional(readOnly = true)
-    public List<TaskResponse> getByNameContaining(Integer idProject, String name) {
-        return taskMapper.listResponse(
-                tasksRepository.findAllByProjects_IdAndNameContainingIgnoreCase(idProject, name));
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TaskResponse> getByNameContaining(Integer idProject, String name) {
+//        return taskMapper.listResponse(
+//                tasksRepository.findAllByProjects_IdAndNameContainingIgnoreCase(idProject, name));
+//    }
+//
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TaskResponse> getByColor(Integer idProject, Colors color) {
+//        return taskMapper.listResponse(
+//                tasksRepository.findAllByProjects_IdAndColor(idProject, color));
+//    }
+//
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<TaskResponse> getByStatus(Integer idProject, Status status) {
+//        return taskMapper.listResponse(
+//                tasksRepository.findAllByProjects_IdAndStatus(idProject, status));
+//    }
+
 
     @Override
     @Transactional(readOnly = true)
-    public List<TaskResponse> getByColor(Integer idProject, Colors color) {
-        return taskMapper.listResponse(
-                tasksRepository.findAllByProjects_IdAndColor(idProject, color));
+    public List<TaskResponse> getByProjectId(
+            Integer idProject,
+            TaskFilterRequest filters) {
+        projectService.findProject(idProject);
+        List<Tasks> tasks;
+        boolean hasName = filters.getName() != null
+                && !filters.getName().isBlank();
+        boolean hasColor = filters.getColor() != null;
+        boolean hasStatus = filters.getStatus() != null;
+
+        if (hasName && hasColor && hasStatus) {
+            tasks = tasksRepository
+                    .findAllByProjects_IdAndNameContainingIgnoreCaseAndColorAndStatus(
+                            idProject,
+                            filters.getName(),
+                            filters.getColor(),
+                            filters.getStatus());
+        } else if (hasName) {
+            tasks = tasksRepository
+                    .findAllByProjects_IdAndNameContainingIgnoreCase(
+                            idProject, filters.getName());
+        } else if (hasColor) {
+            tasks = tasksRepository
+                    .findAllByProjects_IdAndColor(
+                            idProject, filters.getColor());
+        } else if (hasStatus) {
+            tasks = tasksRepository
+                    .findAllByProjects_IdAndStatus(
+                            idProject, filters.getStatus());
+        } else {
+            tasks = tasksRepository.findAllByProjects_Id(idProject);
+        }
+        return taskMapper.listResponse(tasks);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<TaskResponse> getByStatus(Integer idProject, Status status) {
-        return taskMapper.listResponse(
-                tasksRepository.findAllByProjects_IdAndStatus(idProject, status));
-    }
 
     @Override
     @Transactional(readOnly = true)

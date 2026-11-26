@@ -19,7 +19,8 @@ public interface TasksRepository extends JpaRepository<Tasks,Integer> {
     List<Tasks> findAllByProjects_IdAndNameContainingIgnoreCase(Integer idProject, String name);
     List<Tasks> findAllByProjects_IdAndColor(Integer projectsId, Colors color);
     List<Tasks> findAllByProjects_IdAndStatus(Integer projectsId, Status status);
-
+    List<Tasks> findAllByProjects_IdAndNameContainingIgnoreCaseAndColorAndStatus(
+            Integer idProject, String name, Colors color, Status status); //Se agrego para juntar las consultas en el service
     @Query("""
         SELECT t FROM Tasks t
         WHERE t.projects.id = :projectId
