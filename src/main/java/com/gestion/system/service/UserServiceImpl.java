@@ -1,5 +1,6 @@
 package com.gestion.system.service;
 
+import com.gestion.system.dto.request.create.UserCreateRequest;
 import com.gestion.system.dto.request.create.UserRequest;
 import com.gestion.system.dto.request.update.ChangePasswordRequest;
 import com.gestion.system.dto.request.update.UserUpdateRequest;
@@ -15,6 +16,7 @@ import com.gestion.system.model.enums.SystemRole;
 import com.gestion.system.repositories.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,14 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponse create(UserRequest userRequest, Integer createUserId, SystemRole role) {
+    public UserResponse create(UserCreateRequest createRequest, Integer createUserId) {
         User userCreate = userAuthorization.authorizeUser(createUserId, SystemRole.ROOT);
+        UserRequest userRequest =  createRequest.getUserRequest();
         if (usersRepository.existsByEmail(userRequest.getEmail())) {
             throw new DuplicateResourceException("User already exist with email: " + userRequest.getEmail());
         }
 
         User user = userMapper.requestToEntity(userRequest);
-        user.setSystemRole(role);
+        user.setSystemRole(createRequest.getRole());
         user = usersRepository.save(user);
         UserResponse response = userMapper.toResponse(user);
 
@@ -48,7 +51,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponse update(Integer userId, UserUpdateRequest userUpdate) {
+    public UserResponse update(Integer idAdmin, Integer userId, UserUpdateRequest userUpdate) {
+        User admin = userAuthorization.authorizeUser(idAdmin, SystemRole.ADMIN);
         User user = findUser(userId);
         user = userUpdateMapper.updateEntity(userUpdate, user);
         usersRepository.save(user);
@@ -72,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updatePassword(Integer userId, ChangePasswordRequest changePasswordRequest) {
+    public void updatePassword( Integer userId, ChangePasswordRequest changePasswordRequest) {
         User user = findUser(userId);
         passwordValidator(changePasswordRequest, user);
         user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
@@ -82,7 +86,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void delete(Integer targetId, Integer actingId) {
-        User requester = findUser(actingId);
+        User requester = userAuthorization.authorizeUser(actingId, SystemRole.ROOT);
         User target = findUser(targetId);
 
         userAuthorization.validateDeleteUserPermission(target, requester);
